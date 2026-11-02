@@ -1,0 +1,28 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { categories } from '../data/site';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  index?: number;
+  eager?: boolean;
+  sizes?: string;
+}
+const { project, index = 0, eager = false, sizes = '(max-width: 900px) 100vw, 40vw' } = Astro.props;
+const d = project.data;
+const href = `/work/${project.id}/`;
+---
+<article class="card" data-cat={d.category} data-index={index} data-reveal>
+  <div class="card-media">
+    <Image src={d.cover} alt={d.coverAlt} widths={[480, 800, 1200]} sizes={sizes} loading={eager ? 'eager' : 'lazy'} format="webp" quality={78} />
+    {d.preview && <video data-src={d.preview} muted loop playsinline preload="none" aria-hidden="true"></video>}
+    {d.demo && <span class="pill pill--acc card-badge">Exemple</span>}
+  </div>
+  <div class="card-cap">
+    <h3 class="card-title"><a class="card-link" href={href}>{d.title}</a></h3>
+    <span class="pill">{categories[d.category]}</span>
+  </div>
+  <div class="kbar" aria-hidden="true"><i></i><i></i><i></i></div>
+  <p class="card-desc">{d.description}{d.year && <span class="card-year"> · {d.year}</span>}</p>
+</article>

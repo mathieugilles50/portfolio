@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+import CopyIcon from '@lucide/astro/icons/copy';
+const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+---
+<BaseLayout title="Contact" description={`Contacter ${site.name} : e-mail, LinkedIn, CV et formulaire. ${site.availability}.`} page="page-contact">
+  <div class="wrap contact">
+    <div>
+      <h1 class="display" data-reveal>Parlons <span>projet</span></h1>
+      {site.openToWork && <p class="open-badge open-dot" data-reveal>{site.availability}</p>}
+      <dl class="coords">
+        <div>
+          <dt>E-mail</dt>
+          <dd><a href={`mailto:${site.email}`} data-email>{site.email}</a></dd>
+          <button type="button" class="pill" data-copy={site.email}><CopyIcon size={14} aria-hidden="true" /> <span>Copier</span></button>
+        </div>
+        <div>
+          <dt>LinkedIn</dt>
+          <dd><a href={site.linkedin} target="_blank" rel="noopener">{site.linkedin.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}</a></dd>
+          <a class="pill" href={site.linkedin} target="_blank" rel="noopener">Ouvrir ↗</a>
+        </div>
+        {site.cv && (
+          <div>
+            <dt>CV</dt>
+            <dd>CV en PDF</dd>
+            <a class="pill" href={site.cv} download>Télécharger ↓</a>
+          </div>
+        )}
+      </dl>
+    </div>
+
+    <form class="form" method="post" action="/api/contact" data-contact-form novalidate>
+      <h2>Écrire un message</h2>
+      <div class="row-2">
+        <div class="field">
+          <label for="f-name">Nom</label>
+          <input id="f-name" name="name" autocomplete="name" required minlength="2" maxlength="120" />
+          <span class="err" id="f-name-err"></span>
+        </div>
+        <div class="field">
+          <label for="f-email">E-mail</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" required maxlength="200" />
+          <span class="err" id="f-email-err"></span>
+        </div>
+      </div>
+      <fieldset class="field picks">
+        <legend class="lb">Objet</legend>
+        <label><input type="radio" name="subject" value="Offre d'emploi" checked /><span>Offre d'emploi</span></label>
+        <label><input type="radio" name="subject" value="Collaboration" /><span>Collaboration</span></label>
+        <label><input type="radio" name="subject" value="Mission" /><span>Mission</span></label>
+        <label><input type="radio" name="subject" value="Autre" /><span>Autre</span></label>
+      </fieldset>
+      <div class="field">
+        <label for="f-message">Message</label>
+        <textarea id="f-message" name="message" required minlength="10" maxlength="5000"></textarea>
+        <span class="err" id="f-message-err"></span>
+      </div>
+      <div class="hp" aria-hidden="true"><label for="f-website">Ne pas remplir</label><input id="f-website" name="website" tabindex="-1" autocomplete="off" /></div>
+      {turnstileKey && <div class="cf-turnstile" data-sitekey={turnstileKey} data-theme="auto"></div>}
+      <button type="submit" class="btn btn--acc" style="justify-self:start">Envoyer le message</button>
+      <p class="form-status" data-form-status role="status" hidden></p>
+    </form>
+  </div>
+  {turnstileKey && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+</BaseLayout>

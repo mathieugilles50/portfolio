@@ -1,0 +1,19 @@
+---
+import { site } from '../data/site';
+interface Props { title?: string; accent?: string }
+const { title = 'Travaillons', accent = 'ensemble' } = Astro.props;
+---
+<section class="wrap" aria-labelledby="band-title">
+  <div class="contact-band" data-reveal>
+    {site.openToWork && <p class="open-dot">Ouvert aux opportunités</p>}
+    <h2 id="band-title" class="display">{title} <span>{accent}</span></h2>
+    <div class="row">
+      <a class="mail" href={`mailto:${site.email}`}>{site.email}</a>
+      <div class="actions">
+        <a class="btn btn--acc" href="/contact/">Me contacter</a>
+        <a class="btn btn--ghost" href={site.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
+        {site.cv && <a class="btn btn--ghost" href={site.cv} download>CV</a>}
+      </div>
+    </div>
+  </div>
+</section>

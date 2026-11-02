@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ContactBand from '../components/ContactBand.astro';
+import { site, specialties } from '../data/site';
+import { getProjects } from '../data/projects';
+import ArrowRight from '@lucide/astro/icons/arrow-right';
+
+const projects = await getProjects();
+const featured = [...projects.filter((p) => p.data.featured), ...projects.filter((p) => !p.data.featured)].slice(0, 3);
+const [first, last] = site.name.split(' ');
+---
+<BaseLayout page="page-home">
+  <section class="wrap hero" aria-labelledby="hero-title">
+    <p class="kicker" data-reveal>{site.role}</p>
+    <h1 id="hero-title" class="hero-name" data-name aria-label={site.name}>
+      <span class="word" aria-hidden="true">{first}</span> <span class="word" aria-hidden="true">{last}</span>
+    </h1>
+    <div class="hero-row">
+      <p class="hero-hook" data-reveal>Je transforme les idées en <span>expériences visuelles.</span></p>
+      <div class="hero-ctas" data-reveal>
+        <a class="btn" href="/work/">Voir les réalisations <span class="btn-ico"><ArrowRight size={18} aria-hidden="true" /></span></a>
+      </div>
+    </div>
+    <ul class="skills" aria-label="Spécialités">
+      {specialties.map((s) => (
+        <li data-reveal><a href={`/work/?f=${s.id}`}><small>{s.time}</small>{s.label}</a></li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="wrap section" aria-labelledby="sel-title">
+    <div class="section-head">
+      <h2 id="sel-title" class="display">Sélection</h2>
+      <span class="meta">{featured.length} projets</span>
+    </div>
+    <div class="featured">
+      {featured.map((p, i) => <ProjectCard project={p} index={i} eager={i === 0} sizes="(max-width: 900px) 100vw, 33vw" />)}
+    </div>
+    <div class="home-more">
+      <a class="btn" href="/work/">Toutes les réalisations <span class="btn-ico"><ArrowRight size={18} aria-hidden="true" /></span></a>
+    </div>
+  </section>
+
+  <ContactBand />
+</BaseLayout>

@@ -1,0 +1,14 @@
+---
+import { site, nav } from '../data/site';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© {year} {site.name}</span>
+    <nav aria-label="Pied de page">
+      {nav.map((l) => <a href={l.href}>{l.label}</a>)}
+      <a href="/contact/">Contact</a>
+      <a href={site.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
+    </nav>
+  </div>
+</footer>

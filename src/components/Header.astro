@@ -1,0 +1,48 @@
+---
+import { site, nav } from '../data/site';
+import MenuIcon from '@lucide/astro/icons/menu';
+import XIcon from '@lucide/astro/icons/x';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isCurrent = (href: string) => {
+  const h = href.replace(/\/$/, '');
+  return path === h || path.startsWith(h + '/');
+};
+---
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label={`${site.name}, accueil`}>
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text">{site.name}</span>
+    </a>
+    <nav class="nav-links" aria-label="Navigation principale">
+      {nav.map((l) => <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a>)}
+    </nav>
+    <button type="button" class="mode-toggle" data-mode-toggle aria-pressed="false" title="Changer de mode d'affichage">
+      <span class="mode-ico" aria-hidden="true"></span>
+      <span class="lbl-f">Mode simple</span>
+      <span class="lbl-d">Mode immersif</span>
+    </button>
+    <a class="header-contact" href="/contact/" aria-current={isCurrent('/contact/') ? 'page' : undefined}>Contact</a>
+    <button type="button" class="menu-btn" data-menu-open aria-expanded="false" aria-controls="menu-mobile" aria-label="Ouvrir le menu">
+      <MenuIcon size={20} aria-hidden="true" />
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="menu-mobile" data-open="false" role="dialog" aria-modal="true" aria-label="Menu" inert>
+  <div class="top">
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span>{site.name}</a>
+    <button type="button" class="close" data-menu-close aria-label="Fermer le menu"><XIcon size={20} aria-hidden="true" /></button>
+  </div>
+  <nav aria-label="Navigation mobile">
+    <a href="/" aria-current={path === '/' ? 'page' : undefined}>Accueil</a>
+    {nav.map((l) => <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a>)}
+    <a href="/contact/" aria-current={isCurrent('/contact/') ? 'page' : undefined}>Contact</a>
+  </nav>
+  <div class="bottom">
+    {site.openToWork && <small>{site.availability}</small>}
+    <a href={`mailto:${site.email}`}>{site.email}</a>
+    <a href={site.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</div>
