@@ -1,6 +1,6 @@
 # Ajouter un projet
 
-Chaque projet est un fichier Markdown dans `src/content/projects/`. Le nom du fichier devient l'adresse de la page : `mon-projet.md` → `/work/mon-projet/`.
+Chaque projet est un fichier Markdown dans `src/content/projects/`. Le nom du fichier devient l'adresse de la page : `mon-projet.md` → `/realisations/mon-projet/`.
 
 ## 1. Les images
 
@@ -56,7 +56,7 @@ Toutes les sections (contexte, brief, objectifs, rôle, logiciels, processus, re
 
 ## 3. Retirer un projet d'exemple
 
-Supprimez le fichier `exemple-….md` et ses images dans `src/assets/projects/`. Les filtres de la page Work se mettent à jour seuls (un filtre sans projet est grisé).
+Supprimez le fichier `exemple-….md` et ses images dans `src/assets/projects/`. Les filtres de la page Réalisations se mettent à jour seuls (un filtre sans projet est grisé).
 
 ## 4. Vérifier
 

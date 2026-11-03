@@ -8,7 +8,7 @@ export const site = {
   role: 'Créatif multidisciplinaire',
   hook: 'Je transforme les idées en expériences visuelles.',
   description:
-    "Portfolio de Mathieu Gilles, créatif multidisciplinaire : vidéo et montage, motion design, graphisme, photographie et UX/UI design.",
+    "Portfolio de Mathieu Gilles, créatif multidisciplinaire : vidéo et montage, animation graphique, graphisme, photographie et interfaces web.",
   email: 'mathieu.gilles50@gmail.com',
   linkedin: 'https://www.linkedin.com/in/mathieugilles50/',
   /** Chemin du CV dans /public (ex. '/cv/cv-mathieu-gilles.pdf'). Laissez null tant qu'il n'est pas ajouté : les boutons CV sont alors masqués. */
@@ -20,24 +20,24 @@ export const site = {
 
 export const specialties = [
   { id: 'video', label: 'Vidéo & montage', short: 'Vidéo', time: '00:00' },
-  { id: 'motion', label: 'Motion design', short: 'Motion', time: '00:12' },
+  { id: 'motion', label: 'Animation graphique', short: 'Animation', time: '00:12' },
   { id: 'graphic', label: 'Graphisme & identité', short: 'Graphisme', time: '00:24' },
   { id: 'photo', label: 'Photographie & retouche', short: 'Photo', time: '00:36' },
-  { id: 'uxui', label: 'UX/UI & webdesign', short: 'UX/UI', time: '00:48' },
+  { id: 'uxui', label: 'Interfaces & sites web', short: 'Web', time: '00:48' },
 ] as const;
 
-/** Libellés des filtres de la page Work (dans l'ordre du cahier des charges). */
+/** Libellés des filtres de la page Réalisations (dans l'ordre du cahier des charges). */
 export const categories = {
-  video: 'Video',
-  motion: 'Motion Design',
-  graphic: 'Graphic Design',
-  photo: 'Photography',
-  uxui: 'UX/UI Design',
+  video: 'Vidéo',
+  motion: 'Animation',
+  graphic: 'Graphisme',
+  photo: 'Photographie',
+  uxui: 'Interfaces web',
 } as const;
 
 export type CategoryId = keyof typeof categories;
 
 export const nav = [
-  { href: '/work/', label: 'Work' },
-  { href: '/about/', label: 'About' },
+  { href: '/realisations/', label: 'Réalisations' },
+  { href: '/a-propos/', label: 'À propos' },
 ];

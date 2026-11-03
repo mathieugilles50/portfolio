@@ -1,0 +1,111 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContactBand from '../../components/ContactBand.astro';
+import { categories } from '../../data/site';
+import { getProjects, type Project } from '../../data/projects';
+import ArrowLeft from '@lucide/astro/icons/arrow-left';
+import ArrowRight from '@lucide/astro/icons/arrow-right';
+import { getImage } from 'astro:assets';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((project, i) => ({
+    params: { slug: project.id },
+    props: { project, next: projects[(i + 1) % projects.length] },
+  }));
+}
+
+interface Props { project: Project; next: Project }
+const { project, next } = Astro.props;
+const d = project.data;
+const og = await getImage({ src: d.cover, width: 1200, height: 630, fit: 'cover', format: 'jpg' });
+
+/** Vidéo : fichier local (mp4/webm) ou lien Vimeo / YouTube converti en lecteur intégré. */
+function embed(url?: string) {
+  if (!url) return null;
+  const yt = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{11})/);
+  if (yt) return { type: 'iframe', src: `https://www.youtube-nocookie.com/embed/${yt[1]}` };
+  const vm = url.match(/vimeo\.com\/(\d+)/);
+  if (vm) return { type: 'iframe', src: `https://player.vimeo.com/video/${vm[1]}?dnt=1` };
+  return { type: 'file', src: url };
+}
+const video = embed(d.video);
+const meta = [
+  ['Catégorie', categories[d.category]],
+  ['Année', d.year?.toString()],
+  ['Mon rôle', d.role],
+  ['Format', d.format],
+].filter(([, v]) => v);
+---
+<BaseLayout title={d.title} description={d.description} image={og.src} page={`page-project cat-${d.category}`}>
+  <article class="wrap">
+    <a class="back" href="/realisations/" data-back><ArrowLeft size={16} aria-hidden="true" /> Retour aux réalisations</a>
+
+    <header class="project-head">
+      <span class="pill pill--acc">{categories[d.category]}</span>
+      <h1 class="display project-title" data-reveal>{d.title}</h1>
+      <p class="project-lead" data-reveal>{d.description}</p>
+      {d.demo && (
+        <p class="demo-note">Ce projet est un exemple de démonstration. Son contenu sera remplacé par une vraie réalisation.</p>
+      )}
+      <dl class="project-meta">
+        {meta.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+      </dl>
+    </header>
+
+    <div class="project-hero" data-reveal>
+      {video?.type === 'iframe' && (
+        <iframe src={video.src} title={`Vidéo : ${d.title}`} loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+      )}
+      {video?.type === 'file' && (
+        <video src={video.src} controls playsinline preload="metadata" poster={og.src}></video>
+      )}
+      {!video && <Image src={d.cover} alt={d.coverAlt} widths={[800, 1280, 1920]} sizes="(max-width: 1440px) 100vw, 1440px" loading="eager" format="webp" quality={80} />}
+    </div>
+
+    <div class="project-body">
+      {d.context && <section class="block" data-reveal><h2>Contexte</h2><p>{d.context}</p></section>}
+      {d.brief && <section class="block" data-reveal><h2>La demande</h2><p>{d.brief}</p></section>}
+      {d.objectives.length > 0 && (
+        <section class="block" data-reveal><h2>Objectifs</h2><ul class="bullets">{d.objectives.map((o) => <li>{o}</li>)}</ul></section>
+      )}
+      {d.role && <section class="block" data-reveal><h2>Mon rôle</h2><p>{d.role}</p></section>}
+      {d.tools.length > 0 && (
+        <section class="block block--wide" data-reveal><h2>Logiciels et outils</h2><div class="chips">{d.tools.map((t) => <span class="pill">{t}</span>)}</div></section>
+      )}
+      {d.process.length > 0 && (
+        <section class="block block--wide" data-reveal>
+          <h2>Processus créatif</h2>
+          <ol class="steps">{d.process.map((s) => <li><b>{s.title}</b><p>{s.text}</p></li>)}</ol>
+        </section>
+      )}
+    </div>
+
+    {d.gallery.length > 0 && (
+      <section aria-label="Images et rendus" class="project-gallery">
+        {d.gallery.map((g) => (
+          <figure data-reveal>
+            <Image src={g.src} alt={g.alt} widths={[600, 1000, 1600]} sizes="(max-width: 900px) 100vw, 60vw" format="webp" quality={78} />
+            {g.caption && <figcaption>{g.caption}</figcaption>}
+          </figure>
+        ))}
+      </section>
+    )}
+
+    {(d.results || d.conclusion) && (
+      <div class="project-body">
+        {d.results && <section class="block block--wide" data-reveal><h2>Résultats</h2><p>{d.results}</p></section>}
+        {d.conclusion && <section class="block block--wide" data-reveal><h2>Conclusion</h2><p>{d.conclusion}</p></section>}
+      </div>
+    )}
+
+    {next.id !== project.id && (
+      <a class="next-project" href={`/realisations/${next.id}/`}>
+        <span><small>Projet suivant</small><b>{next.data.title}</b></span>
+        <span class="btn-ico"><ArrowRight size={24} aria-hidden="true" /></span>
+      </a>
+    )}
+  </article>
+  <ContactBand title="Un projet" accent="en tête ?" />
+</BaseLayout>

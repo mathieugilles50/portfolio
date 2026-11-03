@@ -1,7 +1,7 @@
 import type { ImageMetadata } from 'astro';
 
 /**
- * Contenu de la page About.
+ * Contenu de la page À propos.
  * Tout ce qui est entre crochets [ ] est un emplacement à remplacer par vos propres informations.
  * Rien ici n'a été inventé : complétez uniquement avec ce qui est vrai.
  */

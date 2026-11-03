@@ -11,7 +11,7 @@ interface Props {
 }
 const { project, index = 0, eager = false, sizes = '(max-width: 900px) 100vw, 40vw' } = Astro.props;
 const d = project.data;
-const href = `/work/${project.id}/`;
+const href = `/realisations/${project.id}/`;
 ---
 <article class="card" data-cat={d.category} data-index={index} data-reveal>
   <div class="card-media">

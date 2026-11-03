@@ -19,12 +19,12 @@ const [first, last] = site.name.split(' ');
     <div class="hero-row">
       <p class="hero-hook" data-reveal>Je transforme les idées en <span>expériences visuelles.</span></p>
       <div class="hero-ctas" data-reveal>
-        <a class="btn" href="/work/">Voir les réalisations <span class="btn-ico"><ArrowRight size={18} aria-hidden="true" /></span></a>
+        <a class="btn" href="/realisations/">Voir les réalisations <span class="btn-ico"><ArrowRight size={18} aria-hidden="true" /></span></a>
       </div>
     </div>
     <ul class="skills" aria-label="Spécialités">
       {specialties.map((s) => (
-        <li data-reveal><a href={`/work/?f=${s.id}`}><small>{s.time}</small>{s.label}</a></li>
+        <li data-reveal><a href={`/realisations/?f=${s.id}`}><small>{s.time}</small>{s.label}</a></li>
       ))}
     </ul>
   </section>
@@ -38,7 +38,7 @@ const [first, last] = site.name.split(' ');
       {featured.map((p, i) => <ProjectCard project={p} index={i} eager={i === 0} sizes="(max-width: 900px) 100vw, 33vw" />)}
     </div>
     <div class="home-more">
-      <a class="btn" href="/work/">Toutes les réalisations <span class="btn-ico"><ArrowRight size={18} aria-hidden="true" /></span></a>
+      <a class="btn" href="/realisations/">Toutes les réalisations <span class="btn-ico"><ArrowRight size={18} aria-hidden="true" /></span></a>
     </div>
   </section>
 

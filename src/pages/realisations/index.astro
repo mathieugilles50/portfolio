@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import ContactBand from '../../components/ContactBand.astro';
+import { categories } from '../../data/site';
+import { getProjects } from '../../data/projects';
+
+const projects = await getProjects();
+const filters = [['all', 'Tous les projets'], ...Object.entries(categories)] as [string, string][];
+const count = (id: string) => (id === 'all' ? projects.length : projects.filter((p) => p.data.category === id).length);
+---
+<BaseLayout title="Réalisations" description="Toutes les réalisations : vidéo, animation graphique, graphisme, photographie et interfaces web." page="page-work">
+  <div class="wrap page-head">
+    <h1 class="display page-title">Réalisations<sup data-count>{projects.length}</sup></h1>
+    <div class="filters" role="group" aria-label="Filtrer les projets par catégorie" data-filters>
+      {filters.map(([id, label], i) => (
+        <button type="button" data-filter={id} aria-pressed={i === 0 ? 'true' : 'false'} disabled={id !== 'all' && count(id) === 0}>
+          {label}<sup>{count(id)}</sup>
+        </button>
+      ))}
+    </div>
+  </div>
+  <p class="sr-only" aria-live="polite" data-filter-status></p>
+  <div class="gallery" data-gallery tabindex="0" aria-label="Galerie des projets">
+    {projects.map((p, i) => <ProjectCard project={p} index={i} eager={i < 2} sizes="(max-width: 900px) 100vw, 40vw" />)}
+  </div>
+  <div class="wrap">
+    <div class="gallery-progress" aria-hidden="true"><span data-pos>01</span><span class="bar"><i data-bar></i></span><span data-total>{String(projects.length).padStart(2, '0')}</span></div>
+  </div>
+  <ContactBand title="Un projet" accent="en tête ?" />
+</BaseLayout>

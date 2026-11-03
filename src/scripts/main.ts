@@ -129,7 +129,7 @@ if (!reduceMotion) {
 }
 
 /* ------------------------------------------------------------------
-   5. Page Work : filtres, galerie à glisser, progression
+   5. Page Réalisations : filtres, galerie à glisser, progression
    ------------------------------------------------------------------ */
 const gallery = document.querySelector<HTMLElement>('[data-gallery]');
 const filterBox = document.querySelector<HTMLElement>('[data-filters]');
@@ -210,7 +210,7 @@ if (filterBox && gallery) {
   }, { passive: false });
 }
 
-// Le lien « Retour à Work » garde le dernier filtre utilisé
+// Le lien « Retour aux réalisations » garde le dernier filtre utilisé
 const back = document.querySelector<HTMLAnchorElement>('[data-back]');
 const lastWork = store.sget('pf-work-url');
 if (back && lastWork) back.href = lastWork;
