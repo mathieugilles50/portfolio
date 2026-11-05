@@ -91,7 +91,11 @@ if (finePointer && !reduceMotion) {
       raf = 0;
       if (mode() !== 'f') return;
       if (lens) { lens.style.left = `${mx}px`; lens.style.top = `${my}px`; }
-      if (!chars.length) return;
+      // Sur une carte projet, la lentille devient un bouton « Voir »
+      const overCard = !!document.elementFromPoint(mx, my)?.closest('.gallery .card, .featured .card');
+      lens?.classList.toggle('is-card', overCard);
+      if (overCard) { lens?.classList.add('is-on'); return; }
+      if (!chars.length) { lens?.classList.remove('is-on'); return; }
       const box = nameEl!.getBoundingClientRect();
       const near = my > box.top - 160 && my < box.bottom + 160;
       lens?.classList.toggle('is-on', near);
@@ -121,6 +125,13 @@ if (!reduceMotion) {
     if (r.top < window.innerHeight * 0.92) return; // déjà visible au chargement : on n'y touche pas
     gsap.set(el, { opacity: 0, y: mode() === 'f' ? 40 : 0 });
   });
+  // Profondeur : l'image glisse doucement dans son cadre au défilement (visible en mode immersif)
+  gsap.utils.toArray<HTMLElement>('.gallery .card-media').forEach((media) => {
+    gsap.fromTo(media, { '--py': '-6%' }, {
+      '--py': '6%', ease: 'none',
+      scrollTrigger: { trigger: media, start: 'top bottom', end: 'bottom top', scrub: true },
+    });
+  });
   ScrollTrigger.batch(items, {
     start: 'top 92%',
     once: true,
@@ -138,7 +149,12 @@ const cards = gallery ? [...gallery.querySelectorAll<HTMLElement>('.card')] : []
 function layoutGallery() {
   if (!gallery) return;
   const visible = cards.filter((c) => !c.hidden);
-  visible.forEach((c, i) => c.classList.toggle('is-offset', i % 3 === 1));
+  visible.forEach((c, i) => {
+    c.classList.toggle('is-offset', i % 3 === 1); // mode simple : grille de 3
+    c.classList.toggle('is-wide', i % 4 === 0 || i % 4 === 3); // mode immersif : grande et petite carte en alternance
+    c.classList.toggle('is-shift', i % 2 === 1);
+    c.dataset.num = String(i + 1).padStart(2, '0');
+  });
   gallery.scrollLeft = 0;
   updateProgress();
 }
