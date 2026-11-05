@@ -127,8 +127,8 @@ if (!reduceMotion) {
   });
   // Profondeur : l'image glisse doucement dans son cadre au défilement (visible en mode immersif)
   gsap.utils.toArray<HTMLElement>('.gallery .card-media').forEach((media) => {
-    gsap.fromTo(media, { '--py': '-6%' }, {
-      '--py': '6%', ease: 'none',
+    gsap.fromTo(media, { '--py': '-30px' }, {
+      '--py': '30px', ease: 'none',
       scrollTrigger: { trigger: media, start: 'top bottom', end: 'bottom top', scrub: true },
     });
   });
@@ -150,9 +150,8 @@ function layoutGallery() {
   if (!gallery) return;
   const visible = cards.filter((c) => !c.hidden);
   visible.forEach((c, i) => {
-    c.classList.toggle('is-offset', i % 3 === 1); // mode simple : grille de 3
-    c.classList.toggle('is-wide', i % 4 === 0 || i % 4 === 3); // mode immersif : grande et petite carte en alternance
-    c.classList.toggle('is-shift', i % 2 === 1);
+    c.classList.toggle('is-offset', i % 3 === 1); // grille à 3 colonnes : colonne du milieu décalée
+    c.classList.toggle('is-shift', i % 2 === 1); // mode immersif à 2 colonnes : 2e colonne décalée
     c.dataset.num = String(i + 1).padStart(2, '0');
   });
   gallery.scrollLeft = 0;

@@ -13,7 +13,7 @@ const { project, index = 0, eager = false, sizes = '(max-width: 900px) 100vw, 40
 const d = project.data;
 const href = `/realisations/${project.id}/`;
 ---
-<article class="card" data-cat={d.category} data-index={index} data-reveal>
+<article class:list={["card", { "is-portrait": d.cover.height > d.cover.width }]} data-cat={d.category} data-index={index} data-reveal>
   <div class="card-media">
     <Image src={d.cover} alt={d.coverAlt} widths={[480, 800, 1200]} sizes={sizes} loading={eager ? 'eager' : 'lazy'} format="webp" quality={78} />
     {d.preview && <video data-src={d.preview} muted loop playsinline preload="none" aria-hidden="true"></video>}

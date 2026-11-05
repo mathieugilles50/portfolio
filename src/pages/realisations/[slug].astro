@@ -54,7 +54,7 @@ const meta = [
       </dl>
     </header>
 
-    <div class="project-hero" data-reveal>
+    <div class:list={["project-hero", { "is-portrait": !video && d.cover.height > d.cover.width }]} data-reveal>
       {video?.type === 'iframe' && (
         <iframe src={video.src} title={`Vidéo : ${d.title}`} loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
       )}
