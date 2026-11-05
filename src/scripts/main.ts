@@ -201,6 +201,42 @@ if (aboutEl && !reduceMotion && mode() === 'f') {
 }
 
 /* ------------------------------------------------------------------
+   4 ter. Page Contact immersive : coordonnées en cascade, formulaire
+          en volet, boutons magnétiques, retour animé après l'envoi
+   ------------------------------------------------------------------ */
+const contactEl = document.querySelector<HTMLElement>('.contact');
+if (contactEl && !reduceMotion && mode() === 'f') {
+  const rows = contactEl.querySelectorAll<HTMLElement>('[data-cascade] > div');
+  if (rows.length) gsap.from(rows, { x: -40, opacity: 0, duration: 0.8, ease: 'expo.out', stagger: 0.12, delay: 0.3 });
+  const panel = contactEl.querySelector<HTMLElement>('[data-contact-form]');
+  if (panel) {
+    gsap.fromTo(panel, { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2, ease: 'expo.inOut', delay: 0.2, clearProps: 'clipPath' });
+    gsap.from(panel.children, { y: 24, opacity: 0, duration: 0.7, ease: 'expo.out', stagger: 0.07, delay: 0.7, clearProps: 'transform,opacity' });
+  }
+}
+if (finePointer && !reduceMotion) {
+  // Effet magnétique léger : le bouton suit un peu la souris
+  document.querySelectorAll<HTMLElement>('[data-magnet]').forEach((b) => {
+    b.addEventListener('pointermove', (e) => {
+      if (mode() !== 'f') return;
+      const r = b.getBoundingClientRect();
+      gsap.to(b, { x: (e.clientX - (r.left + r.width / 2)) * 0.3, y: (e.clientY - (r.top + r.height / 2)) * 0.4, duration: 0.4, ease: 'power3.out' });
+    });
+    b.addEventListener('pointerleave', () => gsap.to(b, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.4)' }));
+  });
+}
+const sendStatus = document.querySelector<HTMLElement>('[data-form-status]');
+if (sendStatus && !reduceMotion) {
+  // Retour animé quand le message de succès ou d'erreur s'affiche (la logique d'envoi ne change pas)
+  new MutationObserver(() => {
+    if (sendStatus.hidden || mode() !== 'f') return;
+    const ok = sendStatus.dataset.state === 'ok';
+    gsap.fromTo(sendStatus, { y: 14, opacity: 0, scale: 0.97 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: ok ? 'back.out(2)' : 'expo.out' });
+    if (!ok) gsap.fromTo(sendStatus, { x: -8 }, { x: 0, duration: 0.5, ease: 'elastic.out(1, 0.3)' });
+  }).observe(sendStatus, { attributes: true, attributeFilter: ['hidden', 'data-state'] });
+}
+
+/* ------------------------------------------------------------------
    5. Page Réalisations : filtres et grille
    ------------------------------------------------------------------ */
 const gallery = document.querySelector<HTMLElement>('[data-gallery]');

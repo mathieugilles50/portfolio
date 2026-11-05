@@ -1,30 +1,30 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site } from '../data/site';
+import { site, categories } from '../data/site';
 import CopyIcon from '@lucide/astro/icons/copy';
 const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 ---
 <BaseLayout title="Contact" description={`Contacter ${site.name} : e-mail, LinkedIn, CV et formulaire. ${site.availability}.`} page="page-contact">
   <div class="wrap contact">
     <div>
-      <h1 class="display" data-reveal>Parlons <span>projet</span></h1>
+      <h1 class="display" data-name aria-label="Parlons projet"><span class="word" aria-hidden="true">Parlons</span> <span class="word accent" aria-hidden="true">projet</span></h1>
       {site.openToWork && <p class="open-badge open-dot" data-reveal>{site.availability}</p>}
-      <dl class="coords">
+      <dl class="coords" data-cascade>
         <div>
           <dt>E-mail</dt>
           <dd><a href={`mailto:${site.email}`} data-email>{site.email}</a></dd>
-          <button type="button" class="pill" data-copy={site.email}><CopyIcon size={14} aria-hidden="true" /> <span>Copier</span></button>
+          <button type="button" class="pill" data-copy={site.email} data-magnet><CopyIcon size={14} aria-hidden="true" /> <span>Copier</span></button>
         </div>
         <div>
           <dt>LinkedIn</dt>
           <dd><a href={site.linkedin} target="_blank" rel="noopener">{site.linkedin.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}</a></dd>
-          <a class="pill" href={site.linkedin} target="_blank" rel="noopener">Ouvrir ↗</a>
+          <a class="pill" href={site.linkedin} target="_blank" rel="noopener" data-magnet>Ouvrir ↗</a>
         </div>
         {site.cv && (
           <div>
             <dt>CV</dt>
             <dd>CV en PDF</dd>
-            <a class="pill" href={site.cv} download>Télécharger ↓</a>
+            <a class="pill" href={site.cv} download data-magnet>Télécharger ↓</a>
           </div>
         )}
       </dl>
@@ -58,9 +58,16 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
       </div>
       <div class="hp" aria-hidden="true"><label for="f-website">Ne pas remplir</label><input id="f-website" name="website" tabindex="-1" autocomplete="off" /></div>
       {turnstileKey && <div class="cf-turnstile" data-sitekey={turnstileKey} data-theme="auto"></div>}
-      <button type="submit" class="btn btn--acc" style="justify-self:start">Envoyer le message</button>
+      <button type="submit" class="btn btn--acc" style="justify-self:start" data-magnet>Envoyer le message</button>
       <p class="form-status" data-form-status role="status" hidden></p>
     </form>
+  </div>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      {[0, 1].map(() => (
+        <span>{['Ouvert aux opportunités', ...Object.values(categories)].map((t) => <>{t}<i>✦</i></>)}</span>
+      ))}
+    </div>
   </div>
   {turnstileKey && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
 </BaseLayout>
