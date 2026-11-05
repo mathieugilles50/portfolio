@@ -129,7 +129,7 @@ if (!reduceMotion) {
 }
 
 /* ------------------------------------------------------------------
-   5. Page Réalisations : filtres, galerie à glisser, progression
+   5. Page Réalisations : filtres et grille
    ------------------------------------------------------------------ */
 const gallery = document.querySelector<HTMLElement>('[data-gallery]');
 const filterBox = document.querySelector<HTMLElement>('[data-filters]');
@@ -183,31 +183,6 @@ if (filterBox && gallery) {
 
   gallery.addEventListener('scroll', updateProgress, { passive: true });
   window.addEventListener('resize', updateProgress);
-  // Glisser à la souris (mode immersif)
-  let down = false; let moved = 0; let sx = 0; let sl = 0;
-  gallery.addEventListener('pointerdown', (e) => {
-    if (e.pointerType !== 'mouse' || mode() !== 'f' || gallery.scrollWidth <= gallery.clientWidth) return;
-    down = true; moved = 0; sx = e.clientX; sl = gallery.scrollLeft;
-  });
-  window.addEventListener('pointermove', (e) => {
-    if (!down) return;
-    moved = Math.abs(e.clientX - sx);
-    if (moved > 4) gallery.classList.add('is-dragging');
-    gallery.scrollLeft = sl - (e.clientX - sx);
-  });
-  window.addEventListener('pointerup', () => { down = false; setTimeout(() => gallery.classList.remove('is-dragging'), 0); });
-  gallery.addEventListener('click', (e) => { if (moved > 6) { e.preventDefault(); e.stopPropagation(); moved = 0; } }, true);
-  // Molette verticale → défilement horizontal en mode immersif
-  gallery.addEventListener('wheel', (e) => {
-    if (mode() !== 'f' || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
-    const max = gallery.scrollWidth - gallery.clientWidth;
-    if (max <= 0) return;
-    const atStart = gallery.scrollLeft <= 0 && e.deltaY < 0;
-    const atEnd = gallery.scrollLeft >= max - 1 && e.deltaY > 0;
-    if (atStart || atEnd) return;
-    e.preventDefault();
-    gallery.scrollLeft += e.deltaY;
-  }, { passive: false });
 }
 
 // Le lien « Retour aux réalisations » garde le dernier filtre utilisé
