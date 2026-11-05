@@ -9,24 +9,24 @@ import portrait from '../assets/about/portrait.webp';
 <BaseLayout title="À propos" description={`Parcours, vision et compétences de ${site.name}, ${site.role.toLowerCase()}.`} page="page-about">
   <div class="wrap about">
     <aside class="about-side">
-      <Image src={about.portrait ?? portrait} alt={about.portraitAlt} widths={[400, 700, 1000]} sizes="(max-width: 900px) 90vw, 30vw" loading="eager" format="webp" />
+      <div class="about-portrait" data-portrait><Image src={about.portrait ?? portrait} alt={about.portraitAlt} widths={[400, 700, 1000]} sizes="(max-width: 900px) 90vw, 30vw" loading="eager" format="webp" /></div>
       <div class="actions">
         {site.cv && <a class="btn btn--acc" href={site.cv} download>Télécharger le CV</a>}
         <a class="btn btn--ghost" href={site.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
       </div>
     </aside>
     <div>
-      <h1 class="display page-title" data-reveal>À propos</h1>
+      <h1 class="display page-title" data-name aria-label="À propos"><span class="word" aria-hidden="true">À</span> <span class="word" aria-hidden="true">propos</span></h1>
       <p class:list={['about-lead', { placeholder: about.intro.startsWith('[') }]} data-reveal>{about.intro.replace(/^\[|\]$/g, '')}</p>
 
       <div class="vision" data-reveal>
         <p class="kicker" style="color:inherit">Ma vision de la création</p>
-        <blockquote>{about.vision}</blockquote>
+        <blockquote data-words>{about.vision}</blockquote>
       </div>
 
       <h2 class="sub" data-reveal>Parcours</h2>
       <ul class="timeline">
-        {about.timeline.map((t) => <li data-reveal><b>{t.year}</b><span>{t.title}</span><span class="todo-hint">{t.place}</span></li>)}
+        {about.timeline.map((t) => <li data-step><b>{t.year}</b><span>{t.title}</span><span class="todo-hint">{t.place}</span></li>)}
       </ul>
 
       <div class="about-cols">

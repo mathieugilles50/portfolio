@@ -11,7 +11,7 @@ const count = (id: string) => (id === 'all' ? projects.length : projects.filter(
 ---
 <BaseLayout title="Réalisations" description="Toutes les réalisations : vidéo, animation graphique, graphisme, photographie et interfaces web." page="page-work">
   <div class="wrap page-head">
-    <h1 class="display page-title">Réalisations<sup data-count>{projects.length}</sup></h1>
+    <h1 class="display page-title" data-name aria-label="Réalisations"><span class="word" aria-hidden="true">Réalisations</span><sup data-count aria-hidden="true">{projects.length}</sup></h1>
     <div class="filters" role="group" aria-label="Filtrer les projets par catégorie" data-filters>
       {filters.map(([id, label], i) => (
         <button type="button" data-filter={id} aria-pressed={i === 0 ? 'true' : 'false'} disabled={id !== 'all' && count(id) === 0}>

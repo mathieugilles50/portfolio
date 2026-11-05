@@ -56,13 +56,15 @@ closeBtn?.addEventListener('click', () => setMenu(false));
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menu?.getAttribute('data-open') === 'true') setMenu(false); });
 
 /* ------------------------------------------------------------------
-   3. Nom à graisse variable + lentille (mode immersif, ordinateur)
+   3. Titres à graisse variable + lentille (mode immersif, ordinateur)
+      Tout titre [data-name] (nom de l'accueil, « Réalisations », « À propos ») :
+      ses mots .word sont découpés en lettres .ch dont la graisse suit la souris.
    ------------------------------------------------------------------ */
-const nameEl = document.querySelector<HTMLElement>('[data-name]');
 const lens = document.querySelector<HTMLElement>('.lens');
-const chars: HTMLElement[] = [];
-if (nameEl) {
-  nameEl.querySelectorAll<HTMLElement>('.word').forEach((w) => {
+type VarTitle = { el: HTMLElement; chars: HTMLElement[] };
+function splitTitle(el: HTMLElement): VarTitle {
+  const chars: HTMLElement[] = [];
+  el.querySelectorAll<HTMLElement>('.word').forEach((w) => {
     const t = w.textContent ?? '';
     w.textContent = '';
     [...t].forEach((c) => {
@@ -73,10 +75,13 @@ if (nameEl) {
       chars.push(s);
     });
   });
+  return { el, chars };
 }
+const titles = [...document.querySelectorAll<HTMLElement>('[data-name]')].map(splitTitle);
+const chars = titles.flatMap((t) => t.chars);
 function setNameWeights() {
   const base = [800, 700, 560, 460, 420, 460, 520, 640, 760, 800, 700, 560, 460];
-  chars.forEach((c, i) => c.style.setProperty('--w', String(base[i % base.length])));
+  titles.forEach((t) => t.chars.forEach((c, i) => c.style.setProperty('--w', String(base[i % base.length]))));
 }
 setNameWeights();
 
@@ -95,12 +100,13 @@ if (finePointer && !reduceMotion) {
       const overCard = !!document.elementFromPoint(mx, my)?.closest('.gallery .card, .featured .card');
       lens?.classList.toggle('is-card', overCard);
       if (overCard) { lens?.classList.add('is-on'); return; }
-      if (!chars.length) { lens?.classList.remove('is-on'); return; }
-      const box = nameEl!.getBoundingClientRect();
-      const near = my > box.top - 160 && my < box.bottom + 160;
-      lens?.classList.toggle('is-on', near);
+      const near = titles.find((t) => {
+        const box = t.el.getBoundingClientRect();
+        return my > box.top - 160 && my < box.bottom + 160;
+      });
+      lens?.classList.toggle('is-on', !!near);
       if (!near) return;
-      chars.forEach((c) => {
+      near.chars.forEach((c) => {
         const r = c.getBoundingClientRect();
         const d = Math.hypot(mx - (r.left + r.width / 2), (my - (r.top + r.height / 2)) * 1.4);
         c.style.setProperty('--w', String(Math.round(800 - Math.min(d / (r.height * 2.2), 1) * 400)));
@@ -114,9 +120,10 @@ if (finePointer && !reduceMotion) {
    4. Animations GSAP (le contenu reste visible sans JavaScript)
    ------------------------------------------------------------------ */
 if (!reduceMotion) {
-  // Intro du nom : une fois par session, en mode immersif.
-  if (chars.length && mode() === 'f' && !store.sget('pf-intro')) {
-    store.sset('pf-intro', '1');
+  // Intro des lettres du titre : une fois par page et par session, en mode immersif.
+  const introKey = `pf-intro${location.pathname}`;
+  if (chars.length && mode() === 'f' && !store.sget(introKey)) {
+    store.sset(introKey, '1');
     gsap.from(chars, { yPercent: 60, opacity: 0, duration: 0.9, ease: 'expo.out', stagger: 0.045 });
   }
   const items = gsap.utils.toArray<HTMLElement>('[data-reveal]');
@@ -140,6 +147,60 @@ if (!reduceMotion) {
 }
 
 /* ------------------------------------------------------------------
+   4 bis. Page À propos immersive : portrait en volet et en profondeur,
+          vision dévoilée mot à mot, parcours et pastilles en cascade
+   ------------------------------------------------------------------ */
+const aboutEl = document.querySelector<HTMLElement>('.about');
+const quote = aboutEl?.querySelector<HTMLElement>('[data-words]');
+const quoteWords: HTMLElement[] = [];
+if (quote) {
+  const text = (quote.textContent ?? '').trim();
+  quote.textContent = '';
+  const sr = document.createElement('span');
+  sr.className = 'sr-only';
+  sr.textContent = text;
+  quote.appendChild(sr);
+  text.split(/\s+/).forEach((w, i) => {
+    const s = document.createElement('span');
+    s.className = 'w';
+    s.setAttribute('aria-hidden', 'true');
+    s.textContent = w;
+    if (i) quote.append(' ');
+    quote.appendChild(s);
+    quoteWords.push(s);
+  });
+}
+if (aboutEl && !reduceMotion && mode() === 'f') {
+  const frame = aboutEl.querySelector<HTMLElement>('[data-portrait]');
+  if (frame) {
+    gsap.fromTo(frame, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.3, ease: 'expo.inOut', clearProps: 'clipPath' });
+    gsap.fromTo(frame, { '--py': '-30px' }, {
+      '--py': '30px', ease: 'none',
+      scrollTrigger: { trigger: aboutEl, start: 'top top', end: 'bottom bottom', scrub: true },
+    });
+  }
+  if (quote && quoteWords.length) {
+    gsap.fromTo(quoteWords, { opacity: 0.15 }, {
+      opacity: 1, ease: 'none', stagger: 0.1,
+      scrollTrigger: { trigger: quote, start: 'top 85%', end: 'bottom 45%', scrub: true },
+    });
+  }
+  const steps = gsap.utils.toArray<HTMLElement>('[data-step]', aboutEl);
+  if (steps.length) {
+    gsap.from(steps, {
+      x: -40, opacity: 0, duration: 0.8, ease: 'expo.out', stagger: 0.12,
+      scrollTrigger: { trigger: steps[0], start: 'top 88%', once: true },
+    });
+  }
+  aboutEl.querySelectorAll<HTMLElement>('.chips').forEach((chips) => {
+    gsap.from(chips.children, {
+      y: 24, opacity: 0, scale: 0.85, duration: 0.6, ease: 'back.out(1.7)', stagger: 0.05,
+      scrollTrigger: { trigger: chips, start: 'top 90%', once: true },
+    });
+  });
+}
+
+/* ------------------------------------------------------------------
    5. Page Réalisations : filtres et grille
    ------------------------------------------------------------------ */
 const gallery = document.querySelector<HTMLElement>('[data-gallery]');
@@ -151,7 +212,8 @@ function layoutGallery() {
   const visible = cards.filter((c) => !c.hidden);
   visible.forEach((c, i) => {
     c.classList.toggle('is-offset', i % 3 === 1); // grille à 3 colonnes : colonne du milieu décalée
-    c.classList.toggle('is-shift', i % 2 === 1); // mode immersif à 2 colonnes : 2e colonne décalée
+    c.classList.toggle('is-wide', i % 4 === 0 || i % 4 === 3); // mode immersif : grande et petite carte en alternance
+    c.classList.toggle('is-shift', i % 2 === 1); // mode immersif : colonne de droite décalée
     c.dataset.num = String(i + 1).padStart(2, '0');
   });
   gallery.scrollLeft = 0;
