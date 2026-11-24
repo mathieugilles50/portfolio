@@ -8,6 +8,7 @@ video: /videos/orangina-publicite.mp4
 preview: /videos/orangina-publicite-apercu.mp4
 format: "Spot de 23 s, 16:9"
 context: "Réalisé pendant mon stage chez Nimi Vision, agence de communication audiovisuelle."
+tools: ["DaVinci Resolve"]
 featured: false
 order: 17
 ---

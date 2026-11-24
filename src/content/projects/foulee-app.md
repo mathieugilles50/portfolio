@@ -8,7 +8,7 @@ coverAlt: "Les quatre écrans de l'appli FOULÉE côte à côte : accueil, cours
 video: /videos/foulee-app.mp4
 preview: /videos/foulee-app-apercu.mp4
 role: "Conception et réalisation"
-tools: ["Illustrator", "After Effects", "ExtendScript", "ffmpeg"]
+tools: ["Illustrator", "After Effects"]
 format: "4 écrans d'appli 1170 × 2532 · icône 1024 × 1024 · pub 9:16 de 15 s en boucle"
 context: "Projet personnel, marque fictive."
 brief: "Une appli de course à pied et de trail : suivi des sorties, de l'allure et de la progression, parcours en nature, défis et badges. La pub est pensée pour Reels, Stories, TikTok et un écran LED de 9 × 16 m."

@@ -8,6 +8,7 @@ video: /videos/renovation-toiture.mp4
 preview: /videos/renovation-toiture-apercu.mp4
 format: "Vidéo de 1 min 16, 16:9"
 context: "Réalisé pendant mon stage chez Nimi Vision, agence de communication audiovisuelle."
+tools: ["DaVinci Resolve"]
 featured: false
 order: 16
 ---

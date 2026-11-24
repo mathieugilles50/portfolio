@@ -8,7 +8,7 @@ coverAlt: "Flacon de parfum SEL en forme de galet, verre fumé et bouchon en cé
 video: /videos/sel-atelier-maree.mp4
 preview: /videos/sel-atelier-maree-apercu.mp4
 role: "Conception et réalisation"
-tools: ["Blender (Cycles)", "Python", "After Effects"]
+tools: ["Blender", "Python", "After Effects"]
 format: "Film produit 1920 × 1080, 15 s en boucle · 3 images fixes 3840 × 2160"
 context: "Projet personnel, marque fictive."
 brief: "Un spot de 15 secondes pour « SEL », eau de parfum imaginaire de la maison Atelier Marée, inspirée de la côte atlantique : cristaux de sel, embruns et galets."

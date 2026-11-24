@@ -8,6 +8,7 @@ video: /videos/nimi-vision-bande-demo.mp4
 preview: /videos/nimi-vision-bande-demo-apercu.mp4
 format: "Bande démo de 1 min 23, 16:9"
 context: "Réalisé pendant mon stage chez Nimi Vision, agence de communication audiovisuelle."
+tools: ["DaVinci Resolve"]
 featured: false
 order: 13
 year: 2024

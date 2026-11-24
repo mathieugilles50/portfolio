@@ -8,7 +8,7 @@ coverAlt: "Affiche Papillons de Nuit 2027 : grand titre blanc sur un ciel de nui
 video: /videos/papillons-de-nuit-2027.mp4
 preview: /videos/papillons-de-nuit-2027-apercu.mp4
 role: "Conception et réalisation"
-tools: ["After Effects", "ExtendScript", "ffmpeg"]
+tools: ["After Effects"]
 format: "Affiche animée 1080 × 1920, 20 s en boucle · affiche fixe 2160 × 3840"
 context: "Projet personnel, affiche non officielle : proposition non commandée par le festival, sans reprise de sa charte. Le titre est redessiné à partir de la police Anton (SIL Open Font License) ; dates et artistes tels qu'annoncés publiquement le 19 novembre 2026."
 brief: "Une affiche animée pensée pour une enseigne LED verticale (drapeau de 3,6 × 6,4 m), vue de 10 à 40 m au coucher du soleil puis à la nuit tombée."

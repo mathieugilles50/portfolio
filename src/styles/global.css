@@ -251,6 +251,7 @@ main { display: block; min-height: 60vh; }
 .card-title { font: 700 clamp(1.1rem, 1.6vw, 1.45rem)/1.1 var(--disp); letter-spacing: -0.03em; }
 .card-desc { color: var(--mut); font-size: 0.95rem; margin-top: 6px; max-width: 46ch; }
 .card-year { font: 600 0.8rem/1 var(--body); color: var(--mut); }
+.card-tools { font: 600 0.72rem/1.4 var(--body); letter-spacing: 0.04em; text-transform: uppercase; color: var(--mut); margin-top: 8px; max-width: 46ch; opacity: 0.85; }
 .card-link::after { content: ''; position: absolute; inset: 0; z-index: 3; border-radius: var(--r); }
 .card-link:focus-visible { outline: none; }
 .card-link:focus-visible::after { outline: 2px solid var(--acc); outline-offset: 4px; }

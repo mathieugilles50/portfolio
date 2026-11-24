@@ -8,6 +8,7 @@ video: /videos/guinguette-des-loupiots.mp4
 preview: /videos/guinguette-des-loupiots-apercu.mp4
 format: "Captation de 3 min 07, 16:9"
 context: "Réalisé pendant mon stage chez Nimi Vision, agence de communication audiovisuelle."
+tools: ["DaVinci Resolve"]
 featured: false
 order: 15
 ---

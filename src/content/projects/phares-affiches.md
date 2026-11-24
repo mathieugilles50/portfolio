@@ -6,7 +6,7 @@ description: "Campagne de trois affiches pour une exposition sur les phares de l
 cover: ../../assets/projects/phares-affiches-metro.jpg
 coverAlt: "Les trois affiches PHARES accrochées dans un couloir de métro carrelé"
 role: "Conception et réalisation"
-tools: ["Illustrator", "Photoshop", "ExtendScript", "Blender (Cycles)"]
+tools: ["Illustrator", "Photoshop", "Blender"]
 format: "3 affiches A2 (PDF/X-4 vectoriel et PNG 300 dpi) · version écran géant · 2 mises en situation"
 context: "Projet personnel, institution fictive."
 brief: "Une campagne d'affiches pour une exposition consacrée aux phares de l'Atlantique au Musée de la Mer des Sables-d'Olonne, du 14 mars au 28 septembre 2027."

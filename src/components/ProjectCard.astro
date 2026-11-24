@@ -25,4 +25,5 @@ const href = `/realisations/${project.id}/`;
   </div>
   <div class="kbar" aria-hidden="true"><i></i><i></i><i></i></div>
   <p class="card-desc">{d.description}{d.year && <span class="card-year"> · {d.year}</span>}</p>
+  {d.tools.length > 0 && <p class="card-tools"><span class="sr-only">Logiciels : </span>{d.tools.join(' · ')}</p>}
 </article>

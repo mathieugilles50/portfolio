@@ -8,7 +8,7 @@ coverAlt: "Brand board ÉLAN : logo vert sur bleu nuit, palette, typographie, pi
 video: /videos/elan-identite.mp4
 preview: /videos/elan-identite-apercu.mp4
 role: "Conception et réalisation"
-tools: ["Python", "After Effects", "ExtendScript", "ffmpeg"]
+tools: ["Python", "After Effects"]
 format: "Identité de marque, brand board 3840 × 2160 · film 16:9 de 15 s en boucle"
 context: "Projet personnel, marque fictive."
 brief: "ÉLAN est une marque de vélos électriques urbains fabriqués en Vendée. Le film de présentation est pensé pour un écran LED de 14 m vu à 60 m de nuit."

@@ -8,7 +8,7 @@ coverAlt: "Affiche La Dernière Marée : un phare la nuit sous la pluie, son fai
 video: /videos/derniere-maree.mp4
 preview: /videos/derniere-maree-apercu.mp4
 role: "Conception et réalisation"
-tools: ["Blender (Cycles)", "Python", "Photoshop", "After Effects"]
+tools: ["Blender", "Python", "Photoshop", "After Effects"]
 format: "Affiche cinéma 2:3 (27 × 40 pouces) · version écran LED vertical · teaser 2:3 de 10 s en boucle"
 context: "Projet personnel, film fictif. L'équipe citée sur l'affiche est fictive."
 brief: "Le key art d'un court métrage de 18 minutes sur la dernière nuit d'un gardien de phare avant l'automatisation, avec une version pour un écran LED vertical de 8 × 12 m vu à 60 m de nuit."
