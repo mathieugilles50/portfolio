@@ -7,3 +7,6 @@ dist/
 .DS_Store
 .wrangler/
 .dev.vars
+
+# Dossier de travail du CV (fichiers sources locaux)
+CV-Mathieu-Gilles-Photoshop/

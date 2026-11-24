@@ -337,6 +337,7 @@ main { display: block; min-height: 60vh; }
 .project-meta dd { margin-top: 8px; font-weight: 600; }
 .project-hero { margin-top: clamp(20px, 3vw, 36px); border-radius: var(--r-lg); overflow: hidden; background: var(--panel); }
 .project-hero img, .project-hero video, .project-hero iframe { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border: 0; display: block; }
+.project-hero video { object-fit: contain; } /* vidéos verticales (9:16, 2:3) affichées entières, sans recadrage */
 .project-hero.is-portrait img { aspect-ratio: auto; height: auto; max-height: 85vh; object-fit: contain; }
 .project-body { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: clamp(28px, 4vw, 56px); }
 .block { background: var(--panel); border-radius: var(--r); padding: clamp(20px, 2.6vw, 36px); min-width: 0; }
