@@ -8,5 +8,6 @@ video: /videos/tee-shirts-express-qui-sommes-nous.mp4
 preview: /videos/tee-shirts-express-qui-sommes-nous-apercu.mp4
 format: "Vidéo de 2 min 27, 16:9 · bannière animée pour la page d'accueil"
 featured: true
+tools: ["DaVinci Resolve"]
 order: 3
 ---

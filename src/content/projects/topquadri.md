@@ -8,5 +8,6 @@ video: /videos/topquadri.mp4
 preview: /videos/topquadri-apercu.mp4
 format: "Film de 1 min 03, 16:9"
 featured: false
+tools: ["DaVinci Resolve"]
 order: 5
 ---

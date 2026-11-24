@@ -8,5 +8,6 @@ video: /videos/insti-duck.mp4
 preview: /videos/insti-duck-apercu.mp4
 format: "Film de 3 min 17, tourné en 4K"
 featured: false
+tools: ["DaVinci Resolve"]
 order: 4
 ---

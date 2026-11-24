@@ -8,5 +8,6 @@ video: /videos/th4-qui-sommes-nous.mp4
 preview: /videos/th4-qui-sommes-nous-apercu.mp4
 format: "Vidéo de 24 s, 16:9 · bannière animée pour la page d'accueil"
 featured: false
+tools: ["DaVinci Resolve"]
 order: 6
 ---

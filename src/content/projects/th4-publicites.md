@@ -8,5 +8,6 @@ video: /videos/th4-publicites.mp4
 preview: /videos/th4-publicites-apercu.mp4
 format: "Spots de 15 à 16 s, 16:9"
 featured: false
+tools: ["DaVinci Resolve"]
 order: 7
 ---

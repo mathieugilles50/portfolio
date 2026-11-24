@@ -8,5 +8,6 @@ video: /videos/sainte-armure.mp4
 preview: /videos/sainte-armure-apercu.mp4
 format: "Film de 40 s, 16:9 · versions site web et verticale 4K"
 featured: true
+tools: ["DaVinci Resolve"]
 order: 1
 ---
