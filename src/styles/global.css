@@ -416,6 +416,19 @@ main { display: block; min-height: 60vh; }
 .about h2.sub { font: 700 clamp(1.4rem, 2.4vw, 2rem)/1 var(--disp); letter-spacing: -0.04em; margin-top: clamp(40px, 5vw, 64px); padding-bottom: 14px; border-bottom: 1px solid var(--ln); }
 .timeline li { display: grid; grid-template-columns: 110px minmax(0, 1fr) minmax(0, 0.6fr); gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--ln); }
 .timeline b { font-weight: 700; }
+.about-role { margin-top: 18px; }
+.about-infos { display: grid; gap: 8px; margin-top: 20px; font: 600 0.9rem/1.3 var(--body); }
+.about-infos div { display: flex; gap: 12px; }
+.about-infos dt { min-width: 72px; color: var(--mut); }
+.exp { display: grid; gap: 14px; margin-top: 18px; }
+.exp article { border-radius: var(--r); padding: clamp(18px, 2.2vw, 26px); box-shadow: inset 0 0 0 1px var(--ln); border-left: 4px solid var(--acc); }
+.exp h3 { font: 700 clamp(1.05rem, 1.6vw, 1.3rem)/1.15 var(--disp); letter-spacing: -0.03em; }
+.exp-meta { margin-top: 6px; font: 600 0.8rem/1.3 var(--body); text-transform: uppercase; letter-spacing: 0.08em; color: var(--mut); }
+.exp ul { display: grid; gap: 6px; margin-top: 14px; }
+.exp li { position: relative; padding-left: 18px; }
+.exp li::before { content: ''; position: absolute; left: 2px; top: 0.6em; width: 6px; height: 6px; background: var(--acc); transform: rotate(45deg); }
+.exp-clients { margin-top: 12px; font-style: italic; color: var(--mut); font-size: 0.92rem; }
+.about-interests { margin-top: 18px; }
 .about-cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 56px); }
 .about-cols .chips { margin-top: 18px; }
 .qualities { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 18px; }

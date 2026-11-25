@@ -2,11 +2,11 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactBand from '../components/ContactBand.astro';
-import { site, specialties } from '../data/site';
+import { site } from '../data/site';
 import { about } from '../data/about';
 import portrait from '../assets/about/portrait.webp';
 ---
-<BaseLayout title="À propos" description={`Parcours, vision et compétences de ${site.name}, ${site.role.toLowerCase()}.`} page="page-about">
+<BaseLayout title="À propos" description={`Parcours, expériences et compétences de ${site.name}, ${about.role.toLowerCase()}.`} page="page-about">
   <div class="wrap about">
     <aside class="about-side">
       <div class="about-portrait" data-portrait><Image src={about.portrait ?? portrait} alt={about.portraitAlt} widths={[400, 700, 1000]} sizes="(max-width: 900px) 90vw, 30vw" loading="eager" format="webp" /></div>
@@ -14,25 +14,45 @@ import portrait from '../assets/about/portrait.webp';
         {site.cv && <a class="btn btn--acc" href={site.cv} download>Télécharger le CV</a>}
         <a class="btn btn--ghost" href={site.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
       </div>
+      {about.infos.length > 0 && (
+        <dl class="about-infos">
+          {about.infos.map((i) => <div><dt>{i.label}</dt><dd>{i.value}</dd></div>)}
+        </dl>
+      )}
     </aside>
     <div>
       <h1 class="display page-title" data-name aria-label="À propos"><span class="word" aria-hidden="true">À</span> <span class="word" aria-hidden="true">propos</span></h1>
-      <p class:list={['about-lead', { placeholder: about.intro.startsWith('[') }]} data-reveal>{about.intro.replace(/^\[|\]$/g, '')}</p>
+      {about.role && <p class="kicker about-role" data-reveal>{about.role}</p>}
+      <p class="about-lead" data-reveal>{about.intro}</p>
 
-      <div class="vision" data-reveal>
-        <p class="kicker" style="color:inherit">Ma vision de la création</p>
-        <blockquote data-words>{about.vision}</blockquote>
-      </div>
+      {about.vision && (
+        <div class="vision" data-reveal>
+          <p class="kicker" style="color:inherit">Ma vision de la création</p>
+          <blockquote data-words>{about.vision}</blockquote>
+        </div>
+      )}
 
       <h2 class="sub" data-reveal>Parcours</h2>
       <ul class="timeline">
         {about.timeline.map((t) => <li data-step><b>{t.year}</b><span>{t.title}</span><span class="todo-hint">{t.place}</span></li>)}
       </ul>
 
+      <h2 class="sub" data-reveal>Expériences</h2>
+      <div class="exp">
+        {about.experience.map((e) => (
+          <article data-reveal>
+            <h3>{e.title}</h3>
+            <p class="exp-meta">{e.meta}</p>
+            <ul>{e.points.map((p) => <li>{p}</li>)}</ul>
+            {e.clients && <p class="exp-clients">{e.clients}</p>}
+          </article>
+        ))}
+      </div>
+
       <div class="about-cols">
         <div>
-          <h2 class="sub">Compétences</h2>
-          <div class="chips">{specialties.map((s) => <span class="pill">{s.label}</span>)}</div>
+          <h2 class="sub">Savoir-faire</h2>
+          <div class="chips">{about.skills.map((s) => <span class="pill">{s}</span>)}</div>
         </div>
         <div>
           <h2 class="sub">Logiciels</h2>
@@ -40,10 +60,21 @@ import portrait from '../assets/about/portrait.webp';
         </div>
       </div>
 
-      <h2 class="sub">Qualités</h2>
-      <div class="qualities">
-        {about.qualities.map((q) => <div data-reveal><b>{q.title}</b><p>{q.text}</p></div>)}
-      </div>
+      {about.interests.length > 0 && (
+        <>
+          <h2 class="sub">Intérêts</h2>
+          <div class="chips about-interests">{about.interests.map((s) => <span class="pill">{s}</span>)}</div>
+        </>
+      )}
+
+      {about.qualities.length > 0 && (
+        <>
+          <h2 class="sub">Qualités</h2>
+          <div class="qualities">
+            {about.qualities.map((q) => <div data-reveal><b>{q.title}</b><p>{q.text}</p></div>)}
+          </div>
+        </>
+      )}
     </div>
   </div>
   <ContactBand title="Envie d'en" accent="savoir plus ?" />

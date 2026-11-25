@@ -12,7 +12,7 @@ export const site = {
   email: 'mathieu.gilles50@gmail.com',
   linkedin: 'https://www.linkedin.com/in/mathieugilles50/',
   /** Chemin du CV dans /public (ex. '/cv/cv-mathieu-gilles.pdf'). Laissez null tant qu'il n'est pas ajouté : les boutons CV sont alors masqués. */
-  cv: null as string | null,
+  cv: '/cv/CV-Mathieu-Gilles.pdf' as string | null,
   openToWork: true,
   availability: 'Ouvert aux opportunités · emploi, collaborations',
   locale: 'fr_FR',
