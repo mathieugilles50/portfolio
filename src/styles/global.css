@@ -243,10 +243,18 @@ main { display: block; min-height: 60vh; }
 :root[data-mode='d'] .hero-film { display: none; }
 @media (prefers-reduced-motion: reduce) { .hero-film { display: none; } }
 .btn-meta { font: 500 0.75rem/1 var(--mono); opacity: 0.7; margin-left: 4px; }
-.film-lead { max-width: 62ch; margin-top: clamp(18px, 2.4vw, 28px); font: 500 clamp(1.05rem, 1.5vw, 1.3rem)/1.5 var(--body); }
-.film-player { margin-top: clamp(20px, 3vw, 32px); border-radius: var(--r-lg); overflow: hidden; background: #000; }
-.film-player video { width: 100%; aspect-ratio: 16 / 9; object-fit: contain; }
-.film-credits { margin-top: 14px; font: 600 0.8rem/1.4 var(--body); color: var(--mut); }
+.film-dialog {
+  width: min(92vw, calc(86vh * 16 / 9)); max-width: none; max-height: none; padding: 0; border: 0;
+  border-radius: var(--r-lg); overflow: hidden; background: #000; color: var(--paper);
+}
+.film-dialog::backdrop { background: rgb(0 0 0 / 0.88); backdrop-filter: blur(6px); }
+.film-dialog video { width: 100%; aspect-ratio: 16 / 9; object-fit: contain; }
+.film-close {
+  position: absolute; z-index: 2; top: 12px; right: 12px; width: 44px; height: 44px; border-radius: 50%;
+  display: grid; place-items: center; font: 400 1.6rem/1 var(--body);
+  background: rgb(0 0 0 / 0.55); color: var(--paper); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.25);
+}
+.film-close:hover { background: var(--acc); color: var(--on-acc); }
 
 .section { padding-top: clamp(64px, 9vw, 140px); }
 .section-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--ln); flex-wrap: wrap; }

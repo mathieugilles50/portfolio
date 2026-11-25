@@ -396,10 +396,13 @@ if (form) {
 const heroFilm = document.querySelector<HTMLElement>('.hero-film');
 const heroVideo = heroFilm?.querySelector<HTMLVideoElement>('video');
 const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
+const filmDialog = document.querySelector<HTMLDialogElement>('[data-film-dialog]');
+const filmPlayer = filmDialog?.querySelector<HTMLVideoElement>('[data-film-player]');
+let syncHeroFilm = () => {};
 if (heroFilm && heroVideo && !reduceMotion && !saveData) {
   let visible = true;
-  const syncHeroFilm = () => {
-    if (mode() === 'f' && visible && !document.hidden) {
+  syncHeroFilm = () => {
+    if (mode() === 'f' && visible && !document.hidden && !filmDialog?.open) {
       heroVideo.play().then(() => heroFilm.classList.add('is-on')).catch(() => { /* lecture auto refusée : l'image fixe reste */ });
     } else {
       heroVideo.pause();
@@ -409,9 +412,14 @@ if (heroFilm && heroVideo && !reduceMotion && !saveData) {
   document.addEventListener('visibilitychange', syncHeroFilm);
   new MutationObserver(syncHeroFilm).observe(root, { attributes: true, attributeFilter: ['data-mode'] });
 }
-// Le bouton « Voir le film » coupe le fond et lance le film avec le son
-document.querySelector<HTMLAnchorElement>('[data-film-link]')?.addEventListener('click', () => {
-  const player = document.querySelector<HTMLVideoElement>('[data-film-player]');
-  heroVideo?.pause();
-  player?.play().catch(() => { /* l'utilisateur lancera la lecture lui-même */ });
+// « Voir le film » : ouvre le film en plein écran par-dessus la page, avec le son
+document.querySelector<HTMLAnchorElement>('[data-film-link]')?.addEventListener('click', (e) => {
+  if (!filmDialog || typeof filmDialog.showModal !== 'function') return; // sinon le lien mène à la vidéo
+  e.preventDefault();
+  filmDialog.showModal();
+  syncHeroFilm();
+  filmPlayer?.play().catch(() => { /* l'utilisateur lancera la lecture lui-même */ });
 });
+filmDialog?.querySelector('[data-film-close]')?.addEventListener('click', () => filmDialog.close());
+filmDialog?.addEventListener('click', (e) => { if (e.target === filmDialog) filmDialog.close(); }); // clic hors du film
+filmDialog?.addEventListener('close', () => { filmPlayer?.pause(); syncHeroFilm(); });
