@@ -12,6 +12,11 @@ const [first, last] = site.name.split(' ');
 ---
 <BaseLayout page="page-home">
   <section class="wrap hero" aria-labelledby="hero-title">
+    <div class="hero-film" aria-hidden="true">
+      <video muted loop playsinline preload="none" poster="/videos/my-creative-city-fond.jpg" tabindex="-1">
+        <source src="/videos/my-creative-city-fond.mp4" type="video/mp4" />
+      </video>
+    </div>
     <p class="kicker" data-reveal>{site.role}</p>
     <h1 id="hero-title" class="hero-name" data-name aria-label={site.name}>
       <span class="word" aria-hidden="true">{first}</span> <span class="word" aria-hidden="true">{last}</span>
@@ -20,6 +25,7 @@ const [first, last] = site.name.split(' ');
       <p class="hero-hook" data-reveal>Je transforme les idées en <span>expériences visuelles.</span></p>
       <div class="hero-ctas" data-reveal>
         <a class="btn" href="/realisations/">Voir les réalisations <span class="btn-ico"><ArrowRight size={18} aria-hidden="true" /></span></a>
+        <a class="btn btn--ghost" href="#film" data-film-link>Voir le film <span class="btn-meta">1 min 20</span></a>
       </div>
     </div>
     <ul class="skills" aria-label="Spécialités">
@@ -27,6 +33,24 @@ const [first, last] = site.name.split(' ');
         <li data-reveal><a href={`/realisations/?f=${s.id}`}><small>{s.time}</small>{s.label}</a></li>
       ))}
     </ul>
+  </section>
+
+  <section class="wrap section film" id="film" aria-labelledby="film-title">
+    <div class="section-head">
+      <h2 id="film-title" class="display">My Creative City</h2>
+      <span class="meta">Film 3D · 1 min 20</span>
+    </div>
+    <p class="film-lead" data-reveal>
+      Une ville entière construite en 3D pour exposer mes réalisations. On la traverse à la première personne,
+      du coucher du soleil jusqu'à une place inspirée de Times Square, où chaque écran diffuse un de mes projets.
+    </p>
+    <div class="film-player" data-reveal>
+      <video controls playsinline preload="none" poster="/videos/my-creative-city-affiche.jpg" data-film-player>
+        <source src="/videos/my-creative-city.mp4" type="video/mp4" />
+        Votre navigateur ne lit pas cette vidéo : <a href="/videos/my-creative-city.mp4">la télécharger</a>.
+      </video>
+    </div>
+    <p class="film-credits">Blender (Cycles) · scripts Python · bande son ElevenLabs · à regarder avec le son</p>
   </section>
 
   <section class="wrap section" aria-labelledby="sel-title">

@@ -388,3 +388,30 @@ if (form) {
     }
   });
 }
+
+/* ------------------------------------------------------------------
+   Film My Creative City : fond vidéo en boucle de l'accueil
+   (mode immersif uniquement, jamais si mouvement réduit ou économie de données)
+   ------------------------------------------------------------------ */
+const heroFilm = document.querySelector<HTMLElement>('.hero-film');
+const heroVideo = heroFilm?.querySelector<HTMLVideoElement>('video');
+const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
+if (heroFilm && heroVideo && !reduceMotion && !saveData) {
+  let visible = true;
+  const syncHeroFilm = () => {
+    if (mode() === 'f' && visible && !document.hidden) {
+      heroVideo.play().then(() => heroFilm.classList.add('is-on')).catch(() => { /* lecture auto refusée : l'image fixe reste */ });
+    } else {
+      heroVideo.pause();
+    }
+  };
+  new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; syncHeroFilm(); }).observe(heroFilm);
+  document.addEventListener('visibilitychange', syncHeroFilm);
+  new MutationObserver(syncHeroFilm).observe(root, { attributes: true, attributeFilter: ['data-mode'] });
+}
+// Le bouton « Voir le film » coupe le fond et lance le film avec le son
+document.querySelector<HTMLAnchorElement>('[data-film-link]')?.addEventListener('click', () => {
+  const player = document.querySelector<HTMLVideoElement>('[data-film-player]');
+  heroVideo?.pause();
+  player?.play().catch(() => { /* l'utilisateur lancera la lecture lui-même */ });
+});
