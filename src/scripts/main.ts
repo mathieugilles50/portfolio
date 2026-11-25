@@ -420,6 +420,8 @@ document.querySelector<HTMLAnchorElement>('[data-film-link]')?.addEventListener(
   syncHeroFilm();
   filmPlayer?.play().catch(() => { /* l'utilisateur lancera la lecture lui-même */ });
 });
-filmDialog?.querySelector('[data-film-close]')?.addEventListener('click', () => filmDialog.close());
-filmDialog?.addEventListener('click', (e) => { if (e.target === filmDialog) filmDialog.close(); }); // clic hors du film
+const closeFilm = () => { filmPlayer?.pause(); filmDialog?.close(); };
+filmDialog?.querySelector('[data-film-close]')?.addEventListener('click', closeFilm);
+filmDialog?.addEventListener('click', (e) => { if (e.target === filmDialog) closeFilm(); }); // clic hors du film
+filmDialog?.addEventListener('cancel', () => filmPlayer?.pause()); // touche Échap
 filmDialog?.addEventListener('close', () => { filmPlayer?.pause(); syncHeroFilm(); });
