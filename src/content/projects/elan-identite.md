@@ -23,7 +23,7 @@ process:
     text: "La roue roule jusqu'à former le logo, la palette et la typographie se déroulent en cartes, l'affiche, l'appli et le vélo défilent, puis le logo revient plein écran sur le Vert Élan avant de boucler sur sa première image."
   - title: Fabrication
     text: "Géométrie générée en Python (SVG), animation After Effects 2026 pilotée par script, rendu aerender et ffmpeg."
-featured: false
+featured: true
 order: 21
 gallery:
   - src: ../../assets/projects/elan-identite-brand-board.jpg

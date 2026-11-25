@@ -17,7 +17,7 @@ process:
     text: "Un flacon en forme de galet, en verre épais, avec un bouchon en céramique gravé, modélisé et mis en lumière entièrement par script dans Blender (Cycles)."
   - title: Montage
     text: "Montage, titrage et étalonnage dans After Effects."
-featured: false
+featured: true
 order: 22
 gallery:
   - src: ../../assets/projects/sel-atelier-maree-flacon.jpg

@@ -266,7 +266,7 @@ main { display: block; min-height: 60vh; }
 .featured .card:first-child .card-media { flex: 1; aspect-ratio: auto; min-height: 100%; }
 :root[data-mode='d'] .featured { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
 :root[data-mode='d'] .featured .card:first-child .card-media { flex: none; aspect-ratio: 4 / 3; min-height: 0; }
-:root[data-mode='d'] .featured .card:nth-child(2) { margin-top: 48px; }
+:root[data-mode='d'] .featured .card:nth-child(3n+2) { margin-top: 48px; }
 .home-more { display: flex; justify-content: center; margin-top: 44px; }
 
 /* ——— Cartes projet ——— */
@@ -500,7 +500,7 @@ main { display: block; min-height: 60vh; }
   :root[data-mode='d'] .skills small { order: 3; margin-left: auto; }
   .featured, :root[data-mode='d'] .featured { grid-template-columns: 1fr; gap: 32px; }
   .featured .card .card-media, .featured .card:first-child .card-media, :root[data-mode='d'] .featured .card:first-child .card-media { aspect-ratio: 4 / 3; min-height: 0; flex: none; }
-  :root[data-mode='d'] .featured .card:nth-child(2) { margin-top: 0; }
+  :root[data-mode='d'] .featured .card:nth-child(3n+2) { margin-top: 0; }
   .gallery, :root[data-mode='d'] .gallery { display: grid; grid-template-columns: 1fr; gap: 36px; overflow: visible; cursor: default; scroll-snap-type: none; padding-inline: max(var(--gutter), env(safe-area-inset-left, 0px)); }
   .gallery .card, .gallery .card:nth-child(3n + 1) { flex: none; }
   .gallery .card-media, :root[data-mode='d'] .gallery .card-media { height: auto; aspect-ratio: 4 / 3; }

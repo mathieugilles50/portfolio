@@ -19,7 +19,7 @@ process:
     text: "Quand les papillons s'envolent, la caméra plonge dans la lumière et traverse la nuit en 3D pour révéler, jour par jour, les premiers artistes annoncés."
   - title: Fabrication
     text: "Animation construite dans After Effects 2026 par un script ExtendScript, rendue avec aerender puis encodée avec ffmpeg."
-featured: false
+featured: true
 order: 20
 gallery:
   - src: ../../assets/projects/papillons-de-nuit-2027-affiche.jpg
