@@ -9,7 +9,10 @@ import portrait from '../assets/about/portrait.webp';
 <BaseLayout title="À propos" description={`Parcours, expériences et compétences de ${site.name}, ${about.role.toLowerCase()}.`} page="page-about">
   <div class="wrap about">
     <aside class="about-side">
-      <div class="about-portrait" data-portrait><Image src={about.portrait ?? portrait} alt={about.portraitAlt} widths={[400, 700, 1000]} sizes="(max-width: 900px) 90vw, 30vw" loading="eager" format="webp" /></div>
+      <div class="about-portrait" data-portrait>
+        <Image class={about.portraitImmersif ? 'portrait-d' : undefined} src={about.portrait ?? portrait} alt={about.portraitAlt} widths={[400, 700, 1000]} sizes="(max-width: 900px) 90vw, 30vw" loading="eager" format="webp" />
+        {about.portraitImmersif && <Image class="portrait-f" src={about.portraitImmersif} alt={about.portraitAlt} widths={[400, 700, 1000]} sizes="(max-width: 900px) 90vw, 30vw" loading="eager" format="webp" />}
+      </div>
       <div class="actions">
         {site.cv && <a class="btn btn--acc" href={site.cv} download>Télécharger le CV</a>}
         <a class="btn btn--ghost" href={site.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>

@@ -407,6 +407,8 @@ main { display: block; min-height: 60vh; }
 .about-portrait { border-radius: var(--r-lg); overflow: hidden; aspect-ratio: 4 / 5; background: var(--panel); }
 .about-portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
 :root[data-mode='f'] .about-portrait img { scale: 1.12; translate: 0 var(--py, 0px); }
+/* Portrait : fond jaune en mode immersif, fond orange en mode simple. */
+:root[data-mode='f'] .about-portrait .portrait-d, :root[data-mode='d'] .about-portrait .portrait-f { display: none; }
 :root[data-mode='d'] [data-words] .w { opacity: 1 !important; }
 .about-side .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
 .about-lead { font: 600 clamp(1.25rem, 2.2vw, 1.9rem)/1.25 var(--body); letter-spacing: -0.02em; margin-top: 24px; max-width: 34ch; }

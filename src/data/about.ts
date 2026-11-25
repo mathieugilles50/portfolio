@@ -1,5 +1,6 @@
 import type { ImageMetadata } from 'astro';
 import portraitMathieu from '../assets/about/portrait-mathieu.png';
+import portraitMathieuJaune from '../assets/about/portrait-mathieu-jaune.png';
 
 /**
  * Contenu de la page À propos, repris du CV (public/cv/CV-Mathieu-Gilles.pdf).
@@ -7,7 +8,10 @@ import portraitMathieu from '../assets/about/portrait-mathieu.png';
  * Un champ vide (vision, qualités) masque simplement le bloc correspondant.
  */
 export const about = {
+  /** Portrait du mode simple (fond orange, comme le CV). */
   portrait: portraitMathieu as ImageMetadata | null,
+  /** Même photo sur fond jaune, pour le mode immersif. */
+  portraitImmersif: portraitMathieuJaune as ImageMetadata | null,
   portraitAlt: 'Mathieu Gilles, appareil photo en main',
   /** Poste recherché, affiché en accroche au-dessus de la présentation. */
   role: 'Monteur vidéo · Motion designer',
@@ -66,6 +70,7 @@ export const about = {
     'Photographie et affiches',
   ],
   software: ['Premiere Pro', 'After Effects', 'DaVinci Resolve', 'Photoshop', 'Illustrator', 'InDesign', 'Canva', 'Figma'],
-  interests: ['Sport', 'Jeux vidéo', 'Films et séries'],
+  /** Vide = rubrique « Intérêts » masquée. */
+  interests: [] as string[],
   qualities: [] as { title: string; text: string }[],
 };
