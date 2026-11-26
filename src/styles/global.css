@@ -267,6 +267,20 @@ main { display: block; min-height: 60vh; }
 :root[data-mode='d'] .featured { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
 :root[data-mode='d'] .featured .card:first-child .card-media { flex: none; aspect-ratio: 4 / 3; min-height: 0; }
 :root[data-mode='d'] .featured .card:nth-child(3n+2) { margin-top: 48px; }
+/* Ordinateur : les 6 projets de la Sélection tiennent dans un seul écran, titre « Sélection » compris.
+   Hauteur d'image = (écran − en-tête − titre de section − 2 légendes − espaces) / 2, sans dépasser du 16:9. */
+@media (min-width: 1081px) {
+  .featured { --feat-h: calc((100dvh - var(--header-h) - 150px - 2 * 96px - clamp(14px, 1.6vw, 24px)) / 2); row-gap: clamp(14px, 1.6vw, 24px); margin-top: 20px; }
+  .featured .card .card-media, .featured .card:first-child .card-media, :root[data-mode='d'] .featured .card:first-child .card-media { flex: none; width: 100%; aspect-ratio: 16 / 9; min-height: 0; max-height: max(150px, var(--feat-h)); }
+  .featured .card .card-media img { object-fit: cover; }
+  .featured .card.is-portrait .card-media img { object-position: 50% 22%; } /* affiche verticale : cadrée sur le titre */
+  :root[data-mode='d'] .featured .card:nth-child(3n+2) { margin-top: 0; }
+  .featured .card-cap { margin-top: 10px; }
+  .featured .card-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  .featured .card-desc { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; margin-top: 4px; }
+  .featured .card-tools { margin-top: 4px; }
+  .featured .kbar, :root[data-mode='d'] .featured .kbar { display: none; }
+}
 .home-more { display: flex; justify-content: center; margin-top: 44px; }
 
 /* ——— Cartes projet ——— */
