@@ -24,6 +24,8 @@ const projects = defineCollection({
       videos: z.array(z.object({ src: z.string(), title: z.string(), poster: image().optional(), credits: z.string().optional() })).default([]),
       /** Courte boucle muette jouée au survol de la carte sur ordinateur (fichier dans /public). */
       preview: z.string().optional(),
+      /** Cadrage de la couverture dans les cartes (CSS object-position), ex. "10% 50%" pour garder un titre placé à gauche. */
+      coverPosition: z.string().optional(),
       role: z.string().optional(),
       tools: z.array(z.string()).default([]),
       format: z.string().optional(),

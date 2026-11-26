@@ -4,6 +4,7 @@ category: uxui
 description: "Application mobile pour noter ses séries et films critère par critère, suivre ce que l'on regarde et retrouver son classement personnel. Conçue sur Figma, du persona aux maquettes."
 cover: ../../assets/projects/cinerate-cover.jpg
 coverAlt: "Trois écrans de l'application CineRate : découverte, accueil et fiche d'une série, à côté du logo"
+coverPosition: "8% 50%"
 video: /videos/cinerate-promo.mp4
 preview: /videos/cinerate-promo-apercu.mp4
 tools: ["Figma"]

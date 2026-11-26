@@ -15,7 +15,7 @@ const href = `/realisations/${project.id}/`;
 ---
 <article class:list={["card", { "is-portrait": d.cover.height > d.cover.width }]} data-cat={d.category} data-index={index} data-reveal>
   <div class="card-media">
-    <Image src={d.cover} alt={d.coverAlt} widths={[480, 800, 1200]} sizes={sizes} loading={eager ? 'eager' : 'lazy'} format="webp" quality={78} />
+    <Image src={d.cover} alt={d.coverAlt} widths={[480, 800, 1200]} sizes={sizes} loading={eager ? 'eager' : 'lazy'} format="webp" quality={78} style={d.coverPosition ? `object-position: ${d.coverPosition}` : undefined} />
     {d.preview && <video data-src={d.preview} muted loop playsinline preload="none" aria-hidden="true"></video>}
     {d.demo && <span class="pill pill--acc card-badge">Exemple</span>}
   </div>
