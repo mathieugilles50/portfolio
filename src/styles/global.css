@@ -342,16 +342,16 @@ main { display: block; min-height: 60vh; }
 .card.is-portrait .card-media img { object-fit: contain; }
 :root[data-mode='f'] .gallery .card.is-portrait .card-media img { scale: 1; translate: none; }
 @media (min-width: 1081px) {
-  :root[data-mode='f'] .gallery { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px 44px; padding-block: clamp(32px, 4vw, 56px) 130px; }
-  :root[data-mode='f'] .gallery .card { grid-column: span 5; }
-  :root[data-mode='f'] .gallery .card.is-wide { grid-column: span 7; }
+  /* Mode immersif : grille régulière de 3 cartes par ligne (4 sur grand écran, voir plus bas) */
+  :root[data-mode='f'] .gallery { gap: 40px 44px; padding-block: clamp(32px, 4vw, 56px) 130px; }
   :root[data-mode='f'] .gallery .card.is-offset { margin-top: 0; }
-  /* Le décalage passe par translate : il ne crée aucun vide dans la grille */
-  :root[data-mode='f'] .gallery .card.is-shift { translate: 0 90px; }
-  /* Petite carte un peu plus haute que large : même hauteur d'image que la grande carte voisine */
-  :root[data-mode='f'] .gallery .card-media { aspect-ratio: 14 / 15; }
-  :root[data-mode='f'] .gallery .card.is-wide .card-media { aspect-ratio: 4 / 3; }
-  :root[data-mode='f'] .gallery .card-title { font-size: clamp(1.3rem, 1.8vw, 1.9rem); }
+  :root[data-mode='f'] .gallery .card-title { font-size: clamp(1.15rem, 1.4vw, 1.6rem); }
+  :root[data-mode='f'] .gallery .card::before { font-size: clamp(1.8rem, 2.6vw, 3rem); }
+}
+/* Grand écran : 4 projets par ligne dans les deux modes */
+@media (min-width: 1600px) {
+  .gallery { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .gallery .card.is-offset { margin-top: 0; }
 }
 .empty { padding: 40px 0; color: var(--mut); }
 
