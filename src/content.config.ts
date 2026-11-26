@@ -20,6 +20,8 @@ const projects = defineCollection({
       gallery: z.array(z.object({ src: image(), alt: z.string(), caption: z.string().optional() })).default([]),
       /** Vidéo principale : fichier dans /public (ex. /videos/projet.mp4) ou lien Vimeo/YouTube. */
       video: z.string().optional(),
+      /** Plusieurs vidéos (ex. verticales) affichées côte à côte à la place de la vidéo principale. */
+      videos: z.array(z.object({ src: z.string(), title: z.string(), poster: image().optional(), credits: z.string().optional() })).default([]),
       /** Courte boucle muette jouée au survol de la carte sur ordinateur (fichier dans /public). */
       preview: z.string().optional(),
       role: z.string().optional(),

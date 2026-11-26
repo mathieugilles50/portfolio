@@ -5,8 +5,17 @@ year: 2026
 description: "Une série de plus de 60 vidéos verticales d'histoire en motion design : une anecdote vraie par épisode, racontée en 1 min 30 avec gravures animées, cartes, compteurs et archives."
 cover: ../../assets/projects/le-fil-cover.jpg
 coverAlt: "Planche des miniatures de la série Le Fil : 24 épisodes, titres en capitales blanches et orange sur fond noir, avec un dessin au trait pour chacun"
-video: /videos/le-fil-joconde.mp4
-preview: /videos/le-fil-joconde-apercu.mp4
+videos:
+  - src: /videos/le-fil-limoger.mp4
+    title: "Dossier 042 · Pourquoi on dit « se faire limoger » ?"
+    poster: ../../assets/projects/le-fil-limoger.jpg
+  - src: /videos/le-fil-liechtenstein.mp4
+    title: "Dossier 040 · L'incroyable armée du Liechtenstein"
+    poster: ../../assets/projects/le-fil-liechtenstein.jpg
+  - src: /videos/le-fil-pise.mp4
+    title: "Dossier 052 · Une guerre a sauvé la tour de Pise"
+    poster: ../../assets/projects/le-fil-pise.jpg
+preview: /videos/le-fil-limoger-apercu.mp4
 role: "Conception et réalisation"
 tools: ["After Effects", "Python", "ElevenLabs"]
 format: "Série de plus de 60 épisodes · vidéos verticales 1080 × 1920 de 1 min 15 à 1 min 40, avec voix off"
