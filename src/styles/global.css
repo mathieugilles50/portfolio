@@ -27,8 +27,8 @@
   --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
   --r: 22px;
   --r-lg: 32px;
-  --gutter: clamp(16px, 3vw, 64px);
-  --max: 1920px; /* zone de contenu large : les projets prennent plus de place sur grand écran */
+  --gutter: clamp(16px, calc(10vw - 22px), 280px); /* marges latérales ≈ 9 % de la largeur sur PC, 16 px sur mobile */
+  --max: 2600px;
   --ease: cubic-bezier(0.2, 0.7, 0.1, 1);
   --header-h: 76px;
   color-scheme: dark;
