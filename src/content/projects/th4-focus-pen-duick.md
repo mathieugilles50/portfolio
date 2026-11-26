@@ -6,7 +6,11 @@ cover: ../../assets/projects/th4-focus-pen-duick-cover.jpg
 coverAlt: "Miniature du podcast : un homme et une femme au micro, casques sur les oreilles, avec le titre « Pen Duick, l'histoire de la marque » et le logo TH4 Focus"
 video: /videos/th4-focus-pen-duick.mp4
 preview: /videos/th4-focus-pen-duick-apercu.mp4
+year: 2026
+role: "Tournage et montage"
+tools: ["DaVinci Resolve"]
 format: "Podcast vidéo 16:9 · 9 min"
+context: "Réalisé pendant mon alternance chez Design Partner, pour TH4."
 featured: true
 featuredOrder: 4
 order: 7.5
