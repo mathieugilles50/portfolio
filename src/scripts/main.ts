@@ -243,15 +243,55 @@ const gallery = document.querySelector<HTMLElement>('[data-gallery]');
 const filterBox = document.querySelector<HTMLElement>('[data-filters]');
 const cards = gallery ? [...gallery.querySelectorAll<HTMLElement>('.card')] : [];
 
+/** Format de la couverture d'une carte (largeur / hauteur), lu sur l'image générée par Astro. */
+function coverRatio(c: HTMLElement) {
+  const img = c.querySelector<HTMLImageElement>('.card-media img');
+  const w = Number(img?.getAttribute('width')), h = Number(img?.getAttribute('height'));
+  return w > 0 && h > 0 ? w / h : 4 / 3;
+}
+const flowMq = window.matchMedia('(min-width: 1081px)');
+const wideMq = window.matchMedia('(min-width: 1300px)');
+/**
+ * Grille éditoriale sur ordinateur : lignes alternées de 4 et 3 cartes (3 et 2 sur écran moyen),
+ * chaque ligne remplit 12 colonnes en donnant plus de place aux couvertures horizontales,
+ * et une carte sur deux est décalée vers le bas (quinconce).
+ */
+function flowGallery(visible: HTMLElement[]) {
+  if (!gallery) return;
+  const on = flowMq.matches;
+  gallery.classList.toggle('is-flow', on);
+  if (!on) { visible.forEach((c) => { c.style.removeProperty('--span'); c.style.removeProperty('--ar'); }); return; }
+  const rows = wideMq.matches ? [4, 3] : [3, 2];
+  let i = 0, r = 0;
+  while (i < visible.length) {
+    const row = visible.slice(i, i + rows[r % 2]);
+    const ratios = row.map(coverRatio);
+    // Poids : vertical (affiche, 9:16) plus étroit, horizontal (16:9) plus large
+    const weights = ratios.map((x) => Math.min(1.5, Math.max(0.7, x * 0.75 + 0.2)));
+    const total = weights.reduce((a, b) => a + b, 0);
+    const raw = weights.map((w) => (12 * w) / total);
+    const spans = raw.map((x) => Math.max(2, Math.floor(x)));
+    let rest = 12 - spans.reduce((a, b) => a + b, 0);
+    const order = raw.map((x, k) => [x - Math.floor(x), k]).sort((a, b) => b[0] - a[0]);
+    for (let k = 0; rest > 0; k = (k + 1) % order.length, rest--) spans[order[k][1]]++;
+    for (let k = 0; rest < 0; k = (k + 1) % spans.length) if (spans[k] > 2) { spans[k]--; rest++; }
+    row.forEach((c, k) => {
+      c.style.setProperty('--span', String(spans[k]));
+      // Proportions de l'image : celles de la couverture, bornées pour éviter les cartes trop hautes ou trop plates
+      c.style.setProperty('--ar', String(Math.min(16 / 9, Math.max(3 / 4, ratios[k]))));
+    });
+    i += row.length; r++;
+  }
+}
 function layoutGallery() {
   if (!gallery) return;
   const visible = cards.filter((c) => !c.hidden);
   visible.forEach((c, i) => {
-    c.classList.toggle('is-offset', i % 3 === 1); // grille à 3 colonnes : colonne du milieu décalée
-    c.classList.toggle('is-wide', i % 4 === 0 || i % 4 === 3); // mode immersif : grande et petite carte en alternance
-    c.classList.toggle('is-shift', i % 2 === 1); // mode immersif : colonne de droite décalée
+    c.classList.toggle('is-offset', i % 3 === 1); // grille à 3 colonnes (sans la grille éditoriale) : colonne du milieu décalée
+    c.classList.toggle('is-shift', i % 2 === 1); // grille éditoriale : une carte sur deux décalée (quinconce)
     c.dataset.num = String(i + 1).padStart(2, '0');
   });
+  flowGallery(visible);
   gallery.scrollLeft = 0;
   updateProgress();
 }
@@ -296,6 +336,9 @@ if (filterBox && gallery) {
 
   gallery.addEventListener('scroll', updateProgress, { passive: true });
   window.addEventListener('resize', updateProgress);
+  // Recalcule la grille éditoriale quand on passe un seuil de largeur
+  flowMq.addEventListener('change', () => { layoutGallery(); ScrollTrigger.refresh(); });
+  wideMq.addEventListener('change', () => { layoutGallery(); ScrollTrigger.refresh(); });
 }
 
 // Le lien « Retour aux réalisations » garde le dernier filtre utilisé

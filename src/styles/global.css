@@ -342,16 +342,21 @@ main { display: block; min-height: 60vh; }
 .card.is-portrait .card-media img { object-fit: contain; }
 :root[data-mode='f'] .gallery .card.is-portrait .card-media img { scale: 1; translate: none; }
 @media (min-width: 1081px) {
-  /* Mode immersif : grille régulière de 3 cartes par ligne (4 sur grand écran, voir plus bas) */
   :root[data-mode='f'] .gallery { gap: 40px 44px; padding-block: clamp(32px, 4vw, 56px) 130px; }
-  :root[data-mode='f'] .gallery .card.is-offset { margin-top: 0; }
   :root[data-mode='f'] .gallery .card-title { font-size: clamp(1.15rem, 1.4vw, 1.6rem); }
   :root[data-mode='f'] .gallery .card::before { font-size: clamp(1.8rem, 2.6vw, 3rem); }
-}
-/* Grand écran : 4 projets par ligne dans les deux modes */
-@media (min-width: 1600px) {
-  .gallery { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .gallery .card.is-offset { margin-top: 0; }
+  /* Grille éditoriale (classe posée par main.ts) : 12 colonnes, lignes de 4 puis 3 cartes (3 puis 2 sous 1300 px),
+     largeur et proportions de chaque carte selon le format de sa couverture (vertical plus étroit, horizontal plus large). */
+  .gallery.is-flow { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .gallery.is-flow .card { grid-column: span var(--span, 4); }
+  .gallery.is-flow .card-media { aspect-ratio: var(--ar, 4 / 3); }
+  .gallery.is-flow .card.is-offset { margin-top: 0; }
+  /* Quinconce : une carte sur deux descend, en mode immersif (léger décalage en mode simple) */
+  :root[data-mode='f'] .gallery.is-flow .card.is-shift { translate: 0 72px; }
+  /* Espace entre les lignes agrandi de la valeur du décalage : une carte décalée ne touche jamais la ligne suivante */
+  :root[data-mode='f'] .gallery.is-flow { row-gap: calc(40px + 72px); }
+  :root[data-mode='d'] .gallery.is-flow { row-gap: calc(48px + 28px); }
+  :root[data-mode='d'] .gallery.is-flow .card.is-shift { translate: 0 28px; }
 }
 .empty { padding: 40px 0; color: var(--mut); }
 
