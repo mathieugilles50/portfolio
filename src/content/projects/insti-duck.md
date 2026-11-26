@@ -7,7 +7,8 @@ coverAlt: "Mains posant un transfert imprimé sur une pile de supports blancs"
 video: /videos/insti-duck.mp4
 preview: /videos/insti-duck-apercu.mp4
 format: "Film de 3 min 17, tourné en 4K"
-featured: false
+featured: true
+featuredOrder: 1
 tools: ["DaVinci Resolve"]
 order: 4
 ---

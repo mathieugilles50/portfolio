@@ -352,11 +352,11 @@ main { display: block; min-height: 60vh; }
   .gallery.is-flow .card-media { aspect-ratio: var(--ar, 4 / 3); }
   .gallery.is-flow .card.is-offset { margin-top: 0; }
   /* Quinconce : une carte sur deux descend, en mode immersif (léger décalage en mode simple) */
-  :root[data-mode='f'] .gallery.is-flow .card.is-shift { translate: 0 72px; }
+  :root[data-mode='f'] .gallery.is-flow .card.is-shift { position: relative; top: 72px; } /* top plutôt que translate, que GSAP réécrit */
   /* Espace entre les lignes agrandi de la valeur du décalage : une carte décalée ne touche jamais la ligne suivante */
   :root[data-mode='f'] .gallery.is-flow { row-gap: calc(40px + 72px); }
   :root[data-mode='d'] .gallery.is-flow { row-gap: calc(48px + 28px); }
-  :root[data-mode='d'] .gallery.is-flow .card.is-shift { translate: 0 28px; }
+  :root[data-mode='d'] .gallery.is-flow .card.is-shift { position: relative; top: 28px; }
 }
 .empty { padding: 40px 0; color: var(--mut); }
 

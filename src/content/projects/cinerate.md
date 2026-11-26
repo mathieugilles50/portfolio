@@ -20,7 +20,7 @@ process:
     text: "Couleurs, typographie Poppins, styles de texte et composants réutilisables."
   - title: Maquettes et prototype
     text: "Les écrans finaux reliés en prototype interactif : lancement, connexion, accueil, découverte, notation, classement, profil."
-featured: true
+featured: false
 order: 0
 gallery:
   - src: ../../assets/projects/cinerate-ecrans.jpg

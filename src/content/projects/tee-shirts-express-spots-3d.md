@@ -7,6 +7,7 @@ coverAlt: "Tee-shirt jaune avec une zone de marquage en pointillés"
 video: /videos/tee-shirts-express-spots-3d.mp4
 preview: /videos/tee-shirts-express-spots-3d-apercu.mp4
 format: "Spots de 6 et 15 s, formats horizontal, carré et vertical"
-featured: false
+featured: true
+featuredOrder: 2
 order: 8
 ---

@@ -5,7 +5,8 @@ description: "Séance photo en studio pour Sainte Armure : pulls, jeans, écharp
 cover: ../../assets/projects/sainte-armure-shooting-cover.jpg
 coverAlt: "Deux modèles en pull rouge et pull marine qui rient, sur fond gris clair"
 format: "Photographie en studio, plans en pied et détails produits"
-featured: false
+featured: true
+featuredOrder: 5
 order: 10
 gallery:
   - src: ../../assets/projects/sainte-armure-shooting-1.jpg

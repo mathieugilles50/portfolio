@@ -7,7 +7,9 @@ import { getProjects } from '../data/projects';
 import ArrowRight from '@lucide/astro/icons/arrow-right';
 
 const projects = await getProjects();
-const featured = [...projects.filter((p) => p.data.featured), ...projects.filter((p) => !p.data.featured)].slice(0, 6);
+// Projets mis en avant, dans l'ordre choisi (featuredOrder), complétés si besoin par les suivants
+const picked = projects.filter((p) => p.data.featured).sort((a, b) => (a.data.featuredOrder ?? 99) - (b.data.featuredOrder ?? 99));
+const featured = [...picked, ...projects.filter((p) => !p.data.featured)].slice(0, 6);
 const [first, last] = site.name.split(' ');
 ---
 <BaseLayout page="page-home">

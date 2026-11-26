@@ -9,7 +9,8 @@ preview: /videos/raidlight-vendee-trail-apercu.mp4
 format: "Film de 3 min 23, 16:9"
 context: "Réalisé pendant mon stage chez Nimi Vision, agence de communication audiovisuelle."
 tools: ["DaVinci Resolve"]
-featured: false
+featured: true
+featuredOrder: 3
 order: 14
 year: 2024
 ---

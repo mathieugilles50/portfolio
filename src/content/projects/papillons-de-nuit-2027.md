@@ -20,6 +20,7 @@ process:
   - title: Fabrication
     text: "Animation construite dans After Effects 2026 par un script ExtendScript, rendue avec aerender puis encodée avec ffmpeg."
 featured: true
+featuredOrder: 6
 order: 20
 gallery:
   - src: ../../assets/projects/papillons-de-nuit-2027-affiche.jpg

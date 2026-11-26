@@ -36,6 +36,8 @@ const projects = defineCollection({
       results: z.string().optional(),
       conclusion: z.string().optional(),
       featured: z.boolean().default(false),
+      /** Position dans la sélection de l'accueil (1 = en premier), pour les projets featured. */
+      featuredOrder: z.number().optional(),
       order: z.number().default(100),
       /** true = projet de démonstration. Il est signalé comme tel sur le site. Supprimez le fichier quand vous ajoutez vos vrais projets. */
       demo: z.boolean().default(false),

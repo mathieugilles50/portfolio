@@ -7,6 +7,6 @@ coverAlt: "Dé à vingt faces sous une lumière rouge"
 video: /videos/stranger-things-generique.mp4
 preview: /videos/stranger-things-generique-apercu.mp4
 format: "Générique de 1 min 30, 16:9"
-featured: true
+featured: false
 order: 2
 ---
