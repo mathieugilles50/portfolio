@@ -370,7 +370,7 @@ main { display: block; min-height: 60vh; }
 .project-hero img, .project-hero video, .project-hero iframe { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border: 0; display: block; }
 .project-hero video { object-fit: contain; } /* vidéos verticales (9:16, 2:3) affichées entières, sans recadrage */
 /* Plusieurs vidéos verticales côte à côte (3 par ligne, défilement horizontal sur mobile). */
-.project-videos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: clamp(20px, 3vw, 36px); }
+.project-videos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: clamp(20px, 3vw, 36px) auto 0; max-width: calc(78vh * 27 / 16 + 32px); } /* les 3 vidéos tiennent en hauteur dans l'écran */
 .project-videos figure { margin: 0; min-width: 0; }
 .project-videos video { width: 100%; aspect-ratio: 9 / 16; object-fit: contain; display: block; border-radius: var(--r); background: #000; }
 .project-videos figcaption { margin-top: 10px; font: 600 0.95rem/1.35 var(--body); }
