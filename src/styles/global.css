@@ -270,11 +270,11 @@ main { display: block; min-height: 60vh; }
 /* Ordinateur : les 6 projets de la Sélection tiennent dans un seul écran, titre « Sélection » compris.
    Hauteur d'image = (écran − en-tête − titre de section − 2 légendes − espaces) / 2, sans dépasser du 16:9. */
 @media (min-width: 1081px) {
-  .featured { --feat-h: calc(1.21 * (100dvh - var(--header-h) - 150px - 2 * 96px - clamp(14px, 1.6vw, 24px)) / 2); /* +10 % puis encore +10 % demandés */ row-gap: clamp(12px, 1.2vw, 20px); margin-top: 12px; }
+  .featured { --feat-h: calc(1.21 * (100dvh - var(--header-h) - 150px - 2 * 96px - clamp(14px, 1.6vw, 24px)) / 2); /* +10 % puis encore +10 % demandés */ row-gap: clamp(10px, 1vw, 18px); margin-top: 6px; }
   /* Titre « Sélection » plus compact pour laisser la place aux images */
   #sel-title { font-size: clamp(2rem, 3.2vw, 3.2rem); }
   #sel-title:is(h2) { line-height: 1; }
-  section:has(> .section-head #sel-title) > .section-head { padding-bottom: 10px; }
+  section:has(> .section-head #sel-title) > .section-head { padding-bottom: 8px; }
   .featured .card .card-media, .featured .card:first-child .card-media, :root[data-mode='d'] .featured .card:first-child .card-media { flex: none; width: 100%; aspect-ratio: 16 / 9; min-height: 0; max-height: max(150px, var(--feat-h)); }
   .featured .card .card-media img { object-fit: cover; }
   .featured .card.is-portrait .card-media img { object-position: 50% 22%; } /* affiche verticale : cadrée sur le titre */
